@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="thewolfs_server-ear">
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/ear-resources"/>
+        <wb-resource deploy-path="/" source-path="/src/main/application" tag="defaultRootSource"/>
+        <dependent-module archiveName="thewolfs_server-web.war" deploy-path="/" handle="module:/resource/thewolfs_server-web/thewolfs_server-web">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="thewolfs_server-ejb.jar" deploy-path="/" handle="module:/resource/thewolfs_server-ejb/thewolfs_server-ejb">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+    </wb-module>
+</project-modules>
