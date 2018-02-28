@@ -12,7 +12,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class Portfolio implements Serializable{
+public class Portfolio implements Serializable  {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
@@ -38,8 +38,6 @@ public class Portfolio implements Serializable{
 	public void setTrader(Trader trader) {
 		this.trader = trader;
 	}
-	
-	
 	
 
 }
