@@ -24,9 +24,9 @@ public class Trader implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Level level;
 	@OneToMany(mappedBy="trader")
-	private List<Option> options_trader;
+	private List<Options> options_trader;
 	@OneToMany(mappedBy="counterparty")
-	private List<Option> options_counterparty;
+	private List<Options> options_counterparty;
 	@OneToOne
 	private Portfolio portfolio;
 	@OneToOne
@@ -71,16 +71,16 @@ public class Trader implements Serializable {
 	public void setLevel(Level level) {
 		this.level = level;
 	}
-	public List<Option> getOptions_trader() {
+	public List<Options> getOptions_trader() {
 		return options_trader;
 	}
-	public void setOptions_trader(List<Option> options_trader) {
+	public void setOptions_trader(List<Options> options_trader) {
 		this.options_trader = options_trader;
 	}
-	public List<Option> getOptions_counterparty() {
+	public List<Options> getOptions_counterparty() {
 		return options_counterparty;
 	}
-	public void setOptions_counterparty(List<Option> options_counterparty) {
+	public void setOptions_counterparty(List<Options> options_counterparty) {
 		this.options_counterparty = options_counterparty;
 	}
 	public Portfolio getPortfolio() {

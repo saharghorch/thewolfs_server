@@ -20,6 +20,25 @@ public class Account implements Serializable {
 	private Currency currency;
 	@OneToOne(mappedBy="account")
 	private Trader trader;
+	
+	
+	public Account() {
+		super();
+	}
+	
+	public Account(Float amount, Currency currency) {
+		super();
+		this.amount = amount;
+		this.currency = currency;
+	}
+	
+	
+
+	public Account(Float amount) {
+		super();
+		this.amount = amount;
+	}
+
 	public int getId() {
 		return id;
 	}
