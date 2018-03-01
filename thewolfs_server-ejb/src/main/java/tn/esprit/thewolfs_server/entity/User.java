@@ -31,7 +31,7 @@ public class User implements Serializable{
 	@Enumerated(EnumType.STRING)
 	private Role role;
 	@OneToMany(mappedBy="user")
-	private List<Option> options;
+	private List<Options> options;
 	public Integer getId() {
 		return id;
 	}
@@ -86,10 +86,10 @@ public class User implements Serializable{
 	public void setRole(Role role) {
 		this.role = role;
 	}
-	public List<Option> getOptions() {
+	public List<Options> getOptions() {
 		return options;
 	}
-	public void setOptions(List<Option> options) {
+	public void setOptions(List<Options> options) {
 		this.options = options;
 	}
 	

@@ -14,7 +14,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class Option implements Serializable {
+public class Options implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
@@ -34,6 +34,11 @@ public class Option implements Serializable {
 	private Trader counterparty;
 	@ManyToOne
 	private Asset asset;
+	public Options() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	
 	public Integer getId() {
 		return id;
 	}
