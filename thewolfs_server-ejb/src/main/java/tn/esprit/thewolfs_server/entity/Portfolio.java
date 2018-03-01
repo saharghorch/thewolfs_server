@@ -20,6 +20,17 @@ public class Portfolio implements Serializable  {
 	private Date creation_date;
 	@OneToOne(mappedBy="portfolio")
 	private Trader trader;
+	
+	
+	public Portfolio() {
+		super();
+	}
+	
+	public Portfolio(Date creation_date) {
+		super();
+		this.creation_date = creation_date;
+	}
+
 	public Integer getId() {
 		return id;
 	}

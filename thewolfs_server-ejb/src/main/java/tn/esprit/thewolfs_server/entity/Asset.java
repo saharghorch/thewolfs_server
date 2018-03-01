@@ -16,7 +16,7 @@ public class Asset implements Serializable {
 	private Integer id;
 	private String type;
 	@OneToMany(mappedBy="asset")
-	private List<Option> options;
+	private List<Options> options;
 	public Integer getId() {
 		return id;
 	}
@@ -29,10 +29,10 @@ public class Asset implements Serializable {
 	public void setType(String type) {
 		this.type = type;
 	}
-	public List<Option> getOptions() {
+	public List<Options> getOptions() {
 		return options;
 	}
-	public void setOptions(List<Option> options) {
+	public void setOptions(List<Options> options) {
 		this.options = options;
 	}
 	
