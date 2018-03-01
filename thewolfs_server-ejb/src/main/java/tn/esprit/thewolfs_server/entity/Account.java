@@ -25,14 +25,7 @@ public class Account implements Serializable {
 	public Account() {
 		super();
 	}
-	
-	
-	public Account(Float amount) {
-		super();
-		this.amount = amount;
-	}
-	
-	
+
 
 
 	public Account(Float amount, Currency currency) {
@@ -40,7 +33,13 @@ public class Account implements Serializable {
 		this.amount = amount;
 		this.currency = currency;
 	}
+	
+	
 
+	public Account(Float amount) {
+		super();
+		this.amount = amount;
+	}
 
 	public int getId() {
 		return id;

@@ -32,6 +32,15 @@ public class User implements Serializable{
 	private Role role;
 	@OneToMany(mappedBy="user")
 	private List<Options> options;
+	
+
+	public User() {
+		
+	}	
+
+   public User(String string) {
+		first_name=string;
+	}
 	public Integer getId() {
 		return id;
 	}

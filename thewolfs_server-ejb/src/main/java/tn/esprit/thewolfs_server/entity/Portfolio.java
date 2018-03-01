@@ -30,6 +30,8 @@ public class Portfolio implements Serializable  {
 		super();
 		this.creation_date = creation_date;
 	}
+	
+
 
 	public Integer getId() {
 		return id;
