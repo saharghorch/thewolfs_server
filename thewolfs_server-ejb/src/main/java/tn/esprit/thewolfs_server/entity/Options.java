@@ -34,6 +34,12 @@ public class Options implements Serializable {
 	private Trader counterparty;
 	@ManyToOne
 	private Asset asset;
+
+	public Options() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	
 	public Integer getId() {
 		return id;
 	}

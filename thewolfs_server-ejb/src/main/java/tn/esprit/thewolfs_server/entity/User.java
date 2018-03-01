@@ -32,6 +32,7 @@ public class User implements Serializable{
 	private Role role;
 	@OneToMany(mappedBy="user")
 	private List<Options> options;
+
 	
 
 	public User() {
