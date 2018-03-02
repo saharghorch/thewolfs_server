@@ -2,10 +2,13 @@ package tn.esprit.thewolfs_server.entity;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,18 +26,60 @@ public class Trader implements Serializable {
 	private String password;
 	@Enumerated(EnumType.STRING)
 	private Level level;
-	@OneToMany(mappedBy="trader")
-	private List<Option> options_trader;
-	@OneToMany(mappedBy="counterparty")
-	private List<Option> options_counterparty;
-	@OneToOne
+	@OneToMany(mappedBy="trader", cascade= CascadeType.PERSIST, fetch=FetchType.EAGER)
+	private Set<Options> options_trader;
+	@OneToMany(mappedBy="counterparty", cascade= CascadeType.PERSIST, fetch=FetchType.EAGER )
+	private Set<Options> options_counterparty;
+	@OneToOne(cascade=CascadeType.PERSIST)
 	private Portfolio portfolio;
-	@OneToOne
+	@OneToOne(cascade=CascadeType.PERSIST)
 	private Watchlist watchlist;
-	@OneToOne
+	@OneToOne(cascade=CascadeType.PERSIST)
 	private Account account;
 	
 	
+	
+	public Trader() {
+		super();
+	}
+	
+	public Trader(String first_name, String last_name, String email, String password, Level level) {
+		super();
+	
+		this.first_name = first_name;
+		this.last_name = last_name;
+		this.email = email;
+		this.password = password;
+		this.level = level;
+	}
+
+	public Trader(String first_name, String last_name, String email, String password, Level level,
+			Set<Options> options_trader, Set<Options> options_counterparty, Portfolio portfolio, Watchlist watchlist,
+			Account account) {
+		super();
+		this.first_name = first_name;
+		this.last_name = last_name;
+		this.email = email;
+		this.password = password;
+		this.level = level;
+		this.options_trader = options_trader;
+		this.options_counterparty = options_counterparty;
+		this.portfolio = portfolio;
+		this.watchlist = watchlist;
+		this.account = account;
+	}
+
+	
+	public Trader(Integer id, String first_name, String last_name, String email, String password, Level level) {
+		super();
+		this.id = id;
+		this.first_name = first_name;
+		this.last_name = last_name;
+		this.email = email;
+		this.password = password;
+		this.level = level;
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -71,16 +116,16 @@ public class Trader implements Serializable {
 	public void setLevel(Level level) {
 		this.level = level;
 	}
-	public List<Option> getOptions_trader() {
+	public Set<Options> getOptions_trader() {
 		return options_trader;
 	}
-	public void setOptions_trader(List<Option> options_trader) {
+	public void setOptions_trader(Set<Options> options_trader) {
 		this.options_trader = options_trader;
 	}
-	public List<Option> getOptions_counterparty() {
+	public Set<Options> getOptions_counterparty() {
 		return options_counterparty;
 	}
-	public void setOptions_counterparty(List<Option> options_counterparty) {
+	public void setOptions_counterparty(Set<Options> options_counterparty) {
 		this.options_counterparty = options_counterparty;
 	}
 	public Portfolio getPortfolio() {
@@ -94,6 +139,12 @@ public class Trader implements Serializable {
 	}
 	public void setWatchlist(Watchlist watchlist) {
 		this.watchlist = watchlist;
+	}
+
+	@Override
+	public String toString() {
+		return "Trader [first_name=" + first_name + ", last_name=" + last_name + ", email=" + email + ", password="
+				+ password + ", level=" + level + "]";
 	}
 	
 	
