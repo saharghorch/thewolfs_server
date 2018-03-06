@@ -1,12 +1,16 @@
 package tn.esprit.thewolfs_server.services;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
-import javax.management.Query;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import tn.esprit.thewolfs_server.entity.Options;
 import tn.esprit.thewolfs_server.entity.Status;
+
 
 @Stateless
 public class OptionsManager implements OptionsRemote {
@@ -26,11 +30,18 @@ public class OptionsManager implements OptionsRemote {
 		
 		return em.find(Options.class, id);
 	}
+	
 	@Override
-	public void UpdateOptionStatus(int id) {
+	public void UpdateOptionStatus(int id,Status status) {
 		Options option = em.find(Options.class, id);
-		option.setStatus(tn.esprit.thewolfs_server.entity.Status.Valid);
+		option.setStatus(status);
 		
+	}
+	@Override
+	public List<Options> findAll() {
+		String jpql = "select o from Options o";
+		Query qry = em.createQuery(jpql, Options.class);
+		return qry.getResultList();
 	}
 	
 
