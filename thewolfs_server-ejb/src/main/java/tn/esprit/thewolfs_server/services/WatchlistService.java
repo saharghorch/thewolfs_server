@@ -1,10 +1,13 @@
 package tn.esprit.thewolfs_server.services;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import tn.esprit.thewolfs_server.entity.Asset;
 import tn.esprit.thewolfs_server.entity.Watchlist;
 @Stateless
 public class WatchlistService implements WatchlistServiceRemote {
@@ -36,6 +39,11 @@ EntityManager em;
 		TypedQuery<Watchlist> query=em.createQuery("SELECT c FROM Watchlist c WHERE c.id= :id",Watchlist.class);
 		
 		return query.setParameter("id", id).getSingleResult();
+	}
+	@Override
+	public List<Watchlist> displayAllWatchlists() {
+		TypedQuery<Watchlist> query=em.createQuery("SELECT c FROM Watchlist c",Watchlist.class);
+		return (query.getResultList());
 	}
 	
 	
