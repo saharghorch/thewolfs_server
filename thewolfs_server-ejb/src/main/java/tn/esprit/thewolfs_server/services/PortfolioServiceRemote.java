@@ -5,6 +5,8 @@ import java.util.List;
 import javax.ejb.Remote;
 
 import tn.esprit.thewolfs_server.entity.Account;
+
+import tn.esprit.thewolfs_server.entity.Options;
 import tn.esprit.thewolfs_server.entity.Portfolio;
 
 @Remote
@@ -14,5 +16,8 @@ public interface PortfolioServiceRemote {
 	public void removePortfolio(int idPortfolio);
 	public Portfolio displayPortfolioById(Integer idPortfolio);
 	public List<Portfolio> displayAllPortfolios();
+	public Integer getIdTraderByPortfolioId(Integer idPortfolio);
+	public List<Portfolio> findPortfolioByCash(Float cashPortfolio);
+
 
 }

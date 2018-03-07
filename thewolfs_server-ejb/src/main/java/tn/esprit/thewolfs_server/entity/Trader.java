@@ -26,16 +26,17 @@ public class Trader implements Serializable {
 	private String password;
 	@Enumerated(EnumType.STRING)
 	private Level level;
+
 	@OneToMany(mappedBy = "trader",cascade={CascadeType.PERSIST	,CascadeType.REMOVE},fetch=FetchType.EAGER)
 	private List<Options> options_trader;
-	@OneToMany(mappedBy = "counterparty")
-	private List<Options> options_counterparty;
+	@OneToMany(mappedBy="counterparty")
+    private List<Options> options_counterparty;
 	@OneToOne
 	private Portfolio portfolio;
 	@OneToOne(cascade = CascadeType.PERSIST)
 	private Watchlist watchlist;
-	@OneToOne(cascade = CascadeType.PERSIST)
-	private Account account;
+	@OneToMany(mappedBy="trader")
+	private List<Account> accounts;;
 
 	public Trader() {
 		super();
@@ -50,6 +51,9 @@ public class Trader implements Serializable {
 		this.level = level;
 	}
 
+
+
+	
 
 	
 
@@ -101,6 +105,8 @@ public class Trader implements Serializable {
 		this.level = level;
 	}
 
+
+
 	
 	public Portfolio getPortfolio() {
 		return portfolio;
@@ -117,8 +123,12 @@ public class Trader implements Serializable {
 	public void setWatchlist(Watchlist watchlist) {
 		this.watchlist = watchlist;
 	}
-	
-
+	public List<Account> getAccounts() {
+		return accounts;
+	}
+	public void setAccounts(List<Account> accounts) {
+		this.accounts = accounts;
+	}
 	public List<Options> getOptions_trader() {
 		return options_trader;
 	}
@@ -133,14 +143,6 @@ public class Trader implements Serializable {
 
 	public void setOptions_counterparty(List<Options> options_counterparty) {
 		this.options_counterparty = options_counterparty;
-	}
-
-	public Account getAccount() {
-		return account;
-	}
-
-	public void setAccount(Account account) {
-		this.account = account;
 	}
 
 	@Override

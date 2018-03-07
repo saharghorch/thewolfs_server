@@ -8,6 +8,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import tn.esprit.thewolfs_server.entity.Account;
+
+import tn.esprit.thewolfs_server.entity.Options;
 import tn.esprit.thewolfs_server.entity.Portfolio;
 
 @Stateless
@@ -40,6 +42,19 @@ public class PortfolioService implements PortfolioServiceRemote{
 		TypedQuery<Portfolio> query=em.createQuery("SELECT c FROM Portfolio c",Portfolio.class);
 		return (query.getResultList());
 	}
+	@Override
+	public Integer getIdTraderByPortfolioId(Integer idPortfolio) {
+		TypedQuery<Integer> query=em.createQuery("SELECT c.id from Trader c join c.Portfolio p where p.id=:idPortfolio",Integer.class);
+		Integer idTrader=query.setParameter("idPortfolio", idPortfolio).getSingleResult();
+	    return idTrader;
+	}
+	@Override
+	public List<Portfolio> findPortfolioByCash(Float cashPortfolio) {
+		TypedQuery<Portfolio> query=em.createQuery("SELECT p FROM Portfolio p WHERE p.cash =:cashPortfolio",Portfolio.class);
+		query.setParameter("cashPortfolio",cashPortfolio);
+		return(query.getResultList());
+	}
+
 	
 
 }

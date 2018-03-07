@@ -13,6 +13,10 @@ public interface AccountServiceRemote {
 	public void removeAccount(int idAccount);
 	public Account displayAccountById(Integer idAccount);
 	public List<Account> displayAllAccounts();
+
+	public void assignAccountToTrader(Integer idAccount,Integer idTrader);
+	public List<Account> findAccountByAmount(Float amountAccount);
+
 	
 
 }

@@ -33,8 +33,38 @@ public class Options implements Serializable {
 	@ManyToOne
 	private Trader counterparty;
 	@ManyToOne
+
+
 	private Asset asset;
+	@ManyToOne
+	private Portfolio portfolio;
+
+	public Options() {
+		// TODO Auto-generated constructor stub
+	}
 	
+	
+	public Options(int id) {
+		// TODO Auto-generated constructor stub
+		this.id=id;
+	}
+
+
+	public Options(Integer id, Float premium_price, Float strike_price, Date expiration_date, Type type, Status status,
+			User user, Trader trader, Trader counterparty, Asset asset) {
+		super();
+		this.id = id;
+		this.premium_price = premium_price;
+		this.strike_price = strike_price;
+		this.expiration_date = expiration_date;
+		this.type = type;
+		this.status = status;
+		this.user = user;
+		this.trader = trader;
+		this.counterparty = counterparty;
+		this.asset = asset;
+	}
+
 
 	public Integer getId() {
 		return id;
@@ -90,5 +120,36 @@ public class Options implements Serializable {
 	public void setCounterparty(Trader counterparty) {
 		this.counterparty = counterparty;
 	}
+	public Asset getAsset() {
+		return asset;
+	}
+	public void setAsset(Asset asset) {
+		this.asset = asset;
+	}
+
+
+
+	public Portfolio getPortfolio() {
+		return portfolio;
+	}
+
+
+	public void setPortfolio(Portfolio portfolio) {
+		this.portfolio = portfolio;
+	}
+	
+	
+	@Override
+	public String toString() {
+		return "Options [id=" + id + ", premium_price=" + premium_price + ", strike_price=" + strike_price
+				+ ", expiration_date=" + expiration_date + ", type=" + type + ", status=" + status + ", user=" + user
+				+ ", trader=" + trader + ", counterparty=" + counterparty + ", asset=" + asset + "]";
+	}
+
+	
+	
+	
+	
+
 
 }
