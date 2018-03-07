@@ -34,6 +34,8 @@ public class Options implements Serializable {
 	private Trader counterparty;
 	@ManyToOne
 	private Asset asset;
+	@ManyToOne
+	private Portfolio portfolio;
 
 	public Options() {
 		// TODO Auto-generated constructor stub
@@ -100,6 +102,18 @@ public class Options implements Serializable {
 	public void setAsset(Asset asset) {
 		this.asset = asset;
 	}
+
+
+	public Portfolio getPortfolio() {
+		return portfolio;
+	}
+
+
+	public void setPortfolio(Portfolio portfolio) {
+		this.portfolio = portfolio;
+	}
+	
+	
 	
 	
 	

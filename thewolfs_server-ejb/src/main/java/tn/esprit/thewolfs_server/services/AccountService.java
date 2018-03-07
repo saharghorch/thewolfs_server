@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import tn.esprit.thewolfs_server.entity.Account;
+import tn.esprit.thewolfs_server.entity.Trader;
 @Stateless
 public class AccountService implements AccountServiceRemote{
 	@PersistenceContext(unitName="thewolfs_server-ejb")
@@ -38,6 +39,20 @@ public class AccountService implements AccountServiceRemote{
 	TypedQuery<Account> query=em.createQuery("SELECT c FROM Account c",Account.class);
 		return (query.getResultList());
 	}
+	@Override
+	public void assignAccountToTrader(Integer idAccount, Integer idTrader) {
+		Trader traderManagedEntity=em.find(Trader.class, idTrader);
+		Account accountManagedEntity=em.find(Account.class, idAccount);
+		traderManagedEntity.getAccounts().add(accountManagedEntity);
+	}
+	@Override
+	public List<Account> findAccountByAmount(Float amountAccount) {
+		TypedQuery<Account> query=em.createQuery("SELECT a FROM Account a WHERE a.amount =:amountAccount",Account.class);
+		query.setParameter("amountAccount",amountAccount);
+		return(query.getResultList());
+		
+	}
+	
 	
 	
 

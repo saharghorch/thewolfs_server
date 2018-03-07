@@ -8,6 +8,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -18,7 +20,9 @@ public class Account implements Serializable {
 	private Float amount;
 	@Enumerated(EnumType.STRING)
 	private Currency currency;
-	@OneToOne(mappedBy="account")
+	@Enumerated(EnumType.STRING)
+	private Activity isActive;
+	@ManyToOne
 	private Trader trader;
 	
 	
@@ -33,6 +37,15 @@ public class Account implements Serializable {
 	}
 	
 	
+	
+	
+
+	public Account(Float amount, Currency currency, Activity isActive) {
+		super();
+		this.amount = amount;
+		this.currency = currency;
+		this.isActive = isActive;
+	}
 
 	public Account(Float amount) {
 		super();
@@ -57,11 +70,25 @@ public class Account implements Serializable {
 	public void setCurrency(Currency currency) {
 		this.currency = currency;
 	}
+	
+	public Activity getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(Activity isActive) {
+		this.isActive = isActive;
+	}
+
 	public Trader getTrader() {
 		return trader;
 	}
 	public void setTrader(Trader trader) {
 		this.trader = trader;
+	}
+
+	@Override
+	public String toString() {
+		return "Account [id=" + id + ", amount=" + amount + ", currency=" + currency + ", isActive=" + isActive + "]";
 	}
 	
 	

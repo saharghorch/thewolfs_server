@@ -31,8 +31,8 @@ public class Trader implements Serializable {
 	private Portfolio portfolio;
 	@OneToOne
 	private Watchlist watchlist;
-	@OneToOne
-	private Account account;
+	@OneToMany(mappedBy="trader")
+	private List<Account> accounts;
 	
 	
 	public Integer getId() {
@@ -94,6 +94,12 @@ public class Trader implements Serializable {
 	}
 	public void setWatchlist(Watchlist watchlist) {
 		this.watchlist = watchlist;
+	}
+	public List<Account> getAccounts() {
+		return accounts;
+	}
+	public void setAccounts(List<Account> accounts) {
+		this.accounts = accounts;
 	}
 	
 	
