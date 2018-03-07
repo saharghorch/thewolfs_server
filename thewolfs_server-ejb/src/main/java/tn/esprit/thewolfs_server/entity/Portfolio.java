@@ -35,7 +35,6 @@ public class Portfolio implements Serializable  {
 		super();
 	}
 	
-	
 	public Portfolio(Date creation_date) {
 		super();
 		this.creation_date = creation_date;
@@ -49,6 +48,7 @@ public class Portfolio implements Serializable  {
 		this.creation_date = creation_date;
 		this.cash = cash;
 	}
+	
 
 
 	public Integer getId() {

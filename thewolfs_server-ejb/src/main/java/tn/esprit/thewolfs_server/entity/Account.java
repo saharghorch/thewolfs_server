@@ -29,7 +29,9 @@ public class Account implements Serializable {
 	public Account() {
 		super();
 	}
-	
+
+
+
 	public Account(Float amount, Currency currency) {
 		super();
 		this.amount = amount;
