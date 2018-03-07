@@ -34,6 +34,8 @@ public class Options implements Serializable {
 	private Trader counterparty;
 	@ManyToOne
 	private Asset asset;
+	
+
 	public Integer getId() {
 		return id;
 	}
@@ -88,15 +90,5 @@ public class Options implements Serializable {
 	public void setCounterparty(Trader counterparty) {
 		this.counterparty = counterparty;
 	}
-	public Asset getAsset() {
-		return asset;
-	}
-	public void setAsset(Asset asset) {
-		this.asset = asset;
-	}
-	
-	
-	
-	
 
 }

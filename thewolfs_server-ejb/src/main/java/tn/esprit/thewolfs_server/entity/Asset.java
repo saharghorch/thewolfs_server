@@ -17,6 +17,9 @@ public class Asset implements Serializable {
 	private String type;
 	@OneToMany(mappedBy="asset")
 	private List<Options> options;
+	
+	
+	
 	public Integer getId() {
 		return id;
 	}

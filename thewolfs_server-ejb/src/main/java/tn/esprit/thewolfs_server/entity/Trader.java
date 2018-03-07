@@ -18,7 +18,7 @@ import javax.persistence.OneToOne;
 @Entity
 public class Trader implements Serializable {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String first_name;
 	private String last_name;
@@ -26,119 +26,121 @@ public class Trader implements Serializable {
 	private String password;
 	@Enumerated(EnumType.STRING)
 	private Level level;
-	@OneToMany(mappedBy="trader", cascade= CascadeType.PERSIST, fetch=FetchType.EAGER)
-	private Set<Options> options_trader;
-	@OneToMany(mappedBy="counterparty", cascade= CascadeType.PERSIST, fetch=FetchType.EAGER )
-	private Set<Options> options_counterparty;
-	@OneToOne(cascade=CascadeType.PERSIST)
+	@OneToMany(mappedBy = "trader",cascade={CascadeType.PERSIST	,CascadeType.REMOVE},fetch=FetchType.EAGER)
+	private List<Options> options_trader;
+	@OneToMany(mappedBy = "counterparty")
+	private List<Options> options_counterparty;
+	@OneToOne
 	private Portfolio portfolio;
-	@OneToOne(cascade=CascadeType.PERSIST)
+	@OneToOne(cascade = CascadeType.PERSIST)
 	private Watchlist watchlist;
-	@OneToOne(cascade=CascadeType.PERSIST)
+	@OneToOne(cascade = CascadeType.PERSIST)
 	private Account account;
-	
-	
-	
+
 	public Trader() {
 		super();
 	}
-	
+
 	public Trader(String first_name, String last_name, String email, String password, Level level) {
 		super();
-	
-		this.first_name = first_name;
+        this.first_name = first_name;
 		this.last_name = last_name;
 		this.email = email;
 		this.password = password;
 		this.level = level;
 	}
 
-	public Trader(String first_name, String last_name, String email, String password, Level level,
-			Set<Options> options_trader, Set<Options> options_counterparty, Portfolio portfolio, Watchlist watchlist,
-			Account account) {
-		super();
-		this.first_name = first_name;
-		this.last_name = last_name;
-		this.email = email;
-		this.password = password;
-		this.level = level;
-		this.options_trader = options_trader;
-		this.options_counterparty = options_counterparty;
-		this.portfolio = portfolio;
-		this.watchlist = watchlist;
-		this.account = account;
-	}
 
 	
-	public Trader(Integer id, String first_name, String last_name, String email, String password, Level level) {
-		super();
-		this.id = id;
-		this.first_name = first_name;
-		this.last_name = last_name;
-		this.email = email;
-		this.password = password;
-		this.level = level;
-	}
 
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
 	public String getFirst_name() {
 		return first_name;
 	}
+
 	public void setFirst_name(String first_name) {
 		this.first_name = first_name;
 	}
+
 	public String getLast_name() {
 		return last_name;
 	}
+
 	public void setLast_name(String last_name) {
 		this.last_name = last_name;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 	public String getPassword() {
 		return password;
 	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 	public Level getLevel() {
 		return level;
 	}
+
 	public void setLevel(Level level) {
 		this.level = level;
 	}
-	public Set<Options> getOptions_trader() {
-		return options_trader;
-	}
-	public void setOptions_trader(Set<Options> options_trader) {
-		this.options_trader = options_trader;
-	}
-	public Set<Options> getOptions_counterparty() {
-		return options_counterparty;
-	}
-	public void setOptions_counterparty(Set<Options> options_counterparty) {
-		this.options_counterparty = options_counterparty;
-	}
+
+	
 	public Portfolio getPortfolio() {
 		return portfolio;
 	}
+
 	public void setPortfolio(Portfolio portfolio) {
 		this.portfolio = portfolio;
 	}
+
 	public Watchlist getWatchlist() {
 		return watchlist;
 	}
+
 	public void setWatchlist(Watchlist watchlist) {
 		this.watchlist = watchlist;
+	}
+	
+
+	public List<Options> getOptions_trader() {
+		return options_trader;
+	}
+
+	public void setOptions_trader(List<Options> options_trader) {
+		this.options_trader = options_trader;
+	}
+
+	public List<Options> getOptions_counterparty() {
+		return options_counterparty;
+	}
+
+	public void setOptions_counterparty(List<Options> options_counterparty) {
+		this.options_counterparty = options_counterparty;
+	}
+
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
 	}
 
 	@Override
@@ -146,7 +148,5 @@ public class Trader implements Serializable {
 		return "Trader [first_name=" + first_name + ", last_name=" + last_name + ", email=" + email + ", password="
 				+ password + ", level=" + level + "]";
 	}
-	
-	
 
 }
