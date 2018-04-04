@@ -8,6 +8,8 @@ import java.util.Set;
 import javax.ejb.Stateless;
 import javax.management.Query;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityNotFoundException;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
@@ -55,12 +57,13 @@ public class TraderService implements TraderServiceRemote {
 
 	@Override
 	public Trader Traderexiste(Trader trader) {
-		
-		TypedQuery<Trader> query=em.createQuery("SELECT e FROM"
-				+ " Trader e WHERE e.email =:param",Trader.class);
-		query.setParameter("param", trader.getEmail());
-		//return(query.getResultList());
-		return trader;
+		try{
+		TypedQuery<Trader> query=em.createQuery("SELECT e FROM Trader e WHERE e.email =:param",Trader.class);
+		return(query.setParameter("param", trader.getEmail()).getSingleResult());
+		}catch (EntityNotFoundException ex) {
+	    } catch (NoResultException ex) {
+	    }
+	    return null;
 	}
 
 	@Override
@@ -88,6 +91,16 @@ public class TraderService implements TraderServiceRemote {
 		long nombre=(long)query.getSingleResult();
 		return nombre;
 		
+	}
+
+	@Override
+	public List<Trader> loginQuery(String email, String password) {
+		TypedQuery q = em.createQuery("Select x from Trader AS x where x.email = :mail and x.password = :pswd" , Trader.class);
+		q.setParameter("mail", email);  
+		q.setParameter("pswd", password) ; 
+		List <Trader> result =  q.getResultList();
+	
+		return result ;
 	}
 
 
