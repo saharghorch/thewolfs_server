@@ -15,6 +15,8 @@ public interface AccountServiceRemote {
 	public List<Account> displayAllAccounts();
 	public void assignAccountToTrader(Integer idAccount,Integer idTrader);
 	public List<Account> findAccountByAmount(Float amountAccount);
-	
+	public long numberAccountEUR();
+	public long numberAccountUSD();
+	public long numberAccountSAR();
 
 }

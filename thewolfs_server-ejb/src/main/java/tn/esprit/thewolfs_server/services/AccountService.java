@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import tn.esprit.thewolfs_server.entity.Account;
+import tn.esprit.thewolfs_server.entity.Currency;
 import tn.esprit.thewolfs_server.entity.Trader;
 @Stateless
 public class AccountService implements AccountServiceRemote{
@@ -44,6 +45,8 @@ public class AccountService implements AccountServiceRemote{
 		Trader traderManagedEntity=em.find(Trader.class, idTrader);
 		Account accountManagedEntity=em.find(Account.class, idAccount);
 		traderManagedEntity.getAccounts().add(accountManagedEntity);
+		accountManagedEntity.setTrader(traderManagedEntity);
+		
 	}
 	@Override
 	public List<Account> findAccountByAmount(Float amountAccount) {
@@ -51,6 +54,24 @@ public class AccountService implements AccountServiceRemote{
 		query.setParameter("amountAccount",amountAccount);
 		return(query.getResultList());
 		
+	}
+	@Override
+	public long numberAccountEUR() {
+		javax.persistence.Query query = em.createQuery("SELECT COUNT(a) FROM Account a WHERE a.currency =:currencyAccount");
+		query.setParameter("currencyAccount",Currency.EUR); 
+        return ((long)query.getSingleResult());
+	}
+	@Override
+	public long numberAccountUSD() {
+		javax.persistence.Query query = em.createQuery("SELECT COUNT(a) FROM Account a WHERE a.currency =:currencyAccount");
+		query.setParameter("currencyAccount",Currency.USD); 
+        return ((long)query.getSingleResult());
+	}
+	@Override
+	public long numberAccountSAR() {
+		javax.persistence.Query query = em.createQuery("SELECT COUNT(a) FROM Account a WHERE a.currency =:currencyAccount");
+		query.setParameter("currencyAccount",Currency.SAR); 
+        return ((long)query.getSingleResult());
 	}
 	
 	

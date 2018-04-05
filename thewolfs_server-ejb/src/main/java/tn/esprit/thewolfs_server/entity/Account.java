@@ -88,10 +88,15 @@ public class Account implements Serializable {
 		this.trader = trader;
 	}
 
+
+
 	@Override
 	public String toString() {
-		return "Account [id=" + id + ", amount=" + amount + ", currency=" + currency + ", isActive=" + isActive + "]";
+		return "Account [id=" + id + ", amount=" + amount + ", currency=" + currency + ", isActive=" + isActive
+				+ ", trader=" + trader + "]";
 	}
+
+	
 	
 	
 

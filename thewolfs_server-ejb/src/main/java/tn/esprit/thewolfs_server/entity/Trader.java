@@ -35,6 +35,20 @@ public class Trader implements Serializable {
 	private List<Account> accounts;
 	
 	
+	
+	public Trader() {
+		super();
+	}
+	
+	public Trader(String first_name, String last_name, String email, String password, Level level) {
+		super();
+		this.first_name = first_name;
+		this.last_name = last_name;
+		this.email = email;
+		this.password = password;
+		this.level = level;
+	}
+
 	public Integer getId() {
 		return id;
 	}
