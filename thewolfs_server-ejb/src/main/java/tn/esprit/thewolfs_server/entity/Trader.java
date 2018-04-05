@@ -51,28 +51,6 @@ public class Trader implements Serializable {
 		this.level = level;
 	}
 
-
-
-	
-
-	
-<<<<<<< HEAD
-	
-	public Trader() {
-		super();
-	}
-	
-	public Trader(String first_name, String last_name, String email, String password, Level level) {
-		super();
-		this.first_name = first_name;
-		this.last_name = last_name;
-		this.email = email;
-		this.password = password;
-		this.level = level;
-	}
-=======
->>>>>>> branch 'master' of https://github.com/saharghorch/thewolfs_server.git
-
 	public Integer getId() {
 		return id;
 	}

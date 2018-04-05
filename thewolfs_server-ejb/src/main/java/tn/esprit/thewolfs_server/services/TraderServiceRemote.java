@@ -1,25 +1,4 @@
-<<<<<<< HEAD
 
-package tn.esprit.thewolfs_server.services;
-import java.util.List;
-import javax.ejb.Remote;
-
-
-import tn.esprit.thewolfs_server.entity.Trader;
-
-@Remote
-public interface TraderServiceRemote {
-	public int addTrader(Trader trader);
-	public int updateTrader(Trader trader);
-	public void deleteTraderById(int traderId);
-	public List<Trader> dislayTrader();
-	public List<Trader> findTraderByName(String firstname);
-	public Trader Traderexiste(Trader trader);
-	public Trader findTraderById(Integer idTrader);
-	
-}
-
-=======
 package tn.esprit.thewolfs_server.services;
 
 
@@ -46,4 +25,4 @@ public interface TraderServiceRemote {
 	public List <Trader> loginQuery(String email,String password);
 	
 }
->>>>>>> branch 'master' of https://github.com/saharghorch/thewolfs_server.git
+

@@ -33,13 +33,11 @@ public class Options implements Serializable {
 	@ManyToOne
 	private Trader counterparty;
 	@ManyToOne
-<<<<<<< HEAD
+
     private Asset asset;
-=======
 
 
-	private Asset asset;
->>>>>>> branch 'master' of https://github.com/saharghorch/thewolfs_server.git
+
 	@ManyToOne
 	private Portfolio portfolio;
 
