@@ -24,6 +24,7 @@ public class Trader implements Serializable {
 	private String last_name;
 	private String email;
 	private String password;
+	private Float solde;	
 	@Enumerated(EnumType.STRING)
 	private Level level;
 
@@ -36,20 +37,22 @@ public class Trader implements Serializable {
 	@OneToOne(cascade = CascadeType.PERSIST)
 	private Watchlist watchlist;
 	@OneToMany(mappedBy="trader")
-	private List<Account> accounts;;
+	private List<Account> accounts;
 
 	public Trader() {
 		super();
 	}
 
-	public Trader(String first_name, String last_name, String email, String password, Level level) {
+	public Trader(String first_name, String last_name, String email, String password, Level level, Float solde) {
 		super();
         this.first_name = first_name;
 		this.last_name = last_name;
 		this.email = email;
 		this.password = password;
 		this.level = level;
+		this.solde =solde;
 	}
+	
 
 	public Integer getId() {
 		return id;
@@ -100,8 +103,15 @@ public class Trader implements Serializable {
 	}
 
 
-
 	
+	public Float getSolde() {
+		return solde;
+	}
+
+	public void setSolde(Float solde) {
+		this.solde = solde;
+	}
+
 	public Portfolio getPortfolio() {
 		return portfolio;
 	}
@@ -142,7 +152,7 @@ public class Trader implements Serializable {
 	@Override
 	public String toString() {
 		return "Trader [first_name=" + first_name + ", last_name=" + last_name + ", email=" + email + ", password="
-				+ password + ", level=" + level + "]";
+				+ password + ", level=" + level + "solde= "+solde+"]";
 	}
 
 }
