@@ -27,16 +27,16 @@ public class Trader implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Level level;
 
-	@OneToMany(mappedBy = "trader",cascade={CascadeType.PERSIST	,CascadeType.REMOVE},fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "trader",cascade={CascadeType.PERSIST	,CascadeType.REMOVE})
 	private List<Options> options_trader;
-	@OneToMany(mappedBy="counterparty")
+	@OneToMany(mappedBy="counterparty",cascade={CascadeType.PERSIST	,CascadeType.REMOVE})
     private List<Options> options_counterparty;
 	@OneToOne
 	private Portfolio portfolio;
 	@OneToOne(cascade = CascadeType.PERSIST)
 	private Watchlist watchlist;
 	@OneToMany(mappedBy="trader")
-	private List<Account> accounts;;
+	private List<Account> accounts;
 
 	public Trader() {
 		super();

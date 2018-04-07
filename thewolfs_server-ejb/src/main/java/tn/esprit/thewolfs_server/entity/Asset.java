@@ -26,7 +26,7 @@ public class Asset implements Serializable {
 	
 	private java.sql.Date  Options_Expiration_Date;
 	private  int Shares_number;
-	@OneToMany(mappedBy="asset")
+	@OneToMany(mappedBy="asset",cascade=CascadeType.REMOVE)
 	
 
 	private List<Options> options;
@@ -92,6 +92,9 @@ public class Asset implements Serializable {
 	public void setStock(Stock stock) {
 		this.stock = stock;
 	}
+
+	
+
 	
 
 }
