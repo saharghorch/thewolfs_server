@@ -9,8 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+
 
 @Entity
 public class Account implements Serializable {
@@ -23,7 +22,7 @@ public class Account implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Activity isActive;
 	@ManyToOne
-	private Trader trader;
+	Trader trader;
 	
 	
 	public Account() {
@@ -81,23 +80,26 @@ public class Account implements Serializable {
 		this.isActive = isActive;
 	}
 
+
+
 	public Trader getTrader() {
 		return trader;
 	}
+
+
+
 	public void setTrader(Trader trader) {
 		this.trader = trader;
 	}
 
+	
 
 
-	@Override
-	public String toString() {
-		return "Account [id=" + id + ", amount=" + amount + ", currency=" + currency + ", isActive=" + isActive
-				+ ", trader=" + trader + "]";
+
 	}
 
 	
 	
 	
 
-}
+

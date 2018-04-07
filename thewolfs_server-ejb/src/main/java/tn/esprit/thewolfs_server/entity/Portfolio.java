@@ -26,7 +26,8 @@ public class Portfolio implements Serializable  {
 	private Float cash;
 	@OneToOne(mappedBy="portfolio")
 	private Trader trader;
-
+	@OneToMany(mappedBy="portfolio")
+	private List<Options> allOptions;
 	
 	
 	public Portfolio() {
@@ -37,25 +38,12 @@ public class Portfolio implements Serializable  {
 		super();
 		this.creation_date = creation_date;}
 
-	@OneToMany
-	private List<Options> allOptions;
-	
-
-	
-
-	
-	
-
-
 	public Portfolio(Date creation_date, Float cash) {
 		super();
 		this.creation_date = creation_date;
 		this.cash = cash;
 
 	}
-	
-
-
 	public Integer getId() {
 		return id;
 	}

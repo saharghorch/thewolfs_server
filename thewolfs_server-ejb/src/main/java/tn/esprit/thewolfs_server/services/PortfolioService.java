@@ -11,6 +11,7 @@ import tn.esprit.thewolfs_server.entity.Account;
 
 import tn.esprit.thewolfs_server.entity.Options;
 import tn.esprit.thewolfs_server.entity.Portfolio;
+import tn.esprit.thewolfs_server.entity.Trader;
 
 @Stateless
 public class PortfolioService implements PortfolioServiceRemote{
@@ -54,7 +55,19 @@ public class PortfolioService implements PortfolioServiceRemote{
 		query.setParameter("cashPortfolio",cashPortfolio);
 		return(query.getResultList());
 	}
-
+	@Override
+	public Portfolio findPortfolioById(int idPortfolio) {
+		return(em.find(Portfolio.class,idPortfolio));
+	}
+	@Override
+	public void assignPortfolioToTrader(Integer idTrader, Integer idPortfolio) {
+		Trader traderManagedEntity=em.find(Trader.class, idTrader);
+		Portfolio portfolioManagedEntity=em.find(Portfolio.class, idPortfolio);
+		traderManagedEntity.setPortfolio(portfolioManagedEntity);
+	}
+	
+	
+		
 	
 
 }

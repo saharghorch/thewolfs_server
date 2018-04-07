@@ -18,6 +18,8 @@ public interface PortfolioServiceRemote {
 	public List<Portfolio> displayAllPortfolios();
 	public Integer getIdTraderByPortfolioId(Integer idPortfolio);
 	public List<Portfolio> findPortfolioByCash(Float cashPortfolio);
-
+	public Portfolio findPortfolioById(int idPortfolio);
+	public void assignPortfolioToTrader(Integer idTrader,Integer idPortfolio);
+	
 
 }
