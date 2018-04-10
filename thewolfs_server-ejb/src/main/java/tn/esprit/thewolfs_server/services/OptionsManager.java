@@ -6,12 +6,17 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import tn.esprit.thewolfs_server.entity.Account;
 import tn.esprit.thewolfs_server.entity.Asset;
 import tn.esprit.thewolfs_server.entity.Options;
 import tn.esprit.thewolfs_server.entity.Portfolio;
 import tn.esprit.thewolfs_server.entity.Status;
 import tn.esprit.thewolfs_server.entity.Trader;
+import tn.esprit.thewolfs_server.entity.Type;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 /*@Stateless
 public class OptionsManager implements OptionsRemote {
 @PersistenceContext (unitName="thewolfs_server-ejb")
@@ -74,7 +79,7 @@ public class OptionsManager implements OptionsRemote {
 	}
 	@Override
 	public List<Options> findOptionsValid(Status Valid) {
-		TypedQuery<Options> query=em.createQuery("select o from Options o where o.status='"+ Valid +"'",Options.class);
+		TypedQuery<Options> query=em.createQuery("select o from Options o where o.status='"+ Valid +"' and o.counterparty IS NULL",Options.class);
 		return query.getResultList();
 	}
 	@Override
@@ -106,6 +111,39 @@ public class OptionsManager implements OptionsRemote {
 		String jpql = "select o from Options o where o.counterparty="+id;
 		TypedQuery qry = em.createQuery(jpql, Options.class);
 		return qry.getResultList();
+	}
+	@Override
+	public String TimeToExpiry(Date d) {
+	 long CONST_DURATION_OF_DAY = 1000l * 60 * 60 * 24;
+	 Date date1= new Date();
+	 long numberOfDay;
+	 long diff = (d.getTime() - date1.getTime());
+	 numberOfDay = diff/CONST_DURATION_OF_DAY;
+	 String s = Long.toString(numberOfDay);
+	 return s;
+	 
+	}
+	@Override
+	public Float FindAmountTrader(int id) {
+		String jpql = "select o.amount from Account o where o.trader="+id;
+		TypedQuery qry = (TypedQuery) em.createQuery(jpql);
+		return (float) qry.getSingleResult();
+	}
+	@Override
+	public void UpdateAmount(int trader_id, float am) {
+		Account account = em.find(Account.class, trader_id);
+		account.setAmount(am);
+		
+	}
+	@Override
+	public List<Options> findOptionsValidSold(Status Valid) {
+		TypedQuery<Options> query=em.createQuery("select o from Options o where o.status='"+ Valid +"' and o.counterparty IS NOT NULL",Options.class);
+		return query.getResultList();
+	}
+	@Override
+	public List<Options> findOptionsByType(Type type) {
+		TypedQuery<Options> query=em.createQuery("select o from Options o where o.type='"+ type +"'",Options.class);
+		return query.getResultList();
 	}
 	
 
