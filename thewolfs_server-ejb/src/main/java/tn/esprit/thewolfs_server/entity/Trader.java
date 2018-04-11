@@ -24,12 +24,12 @@ public class Trader implements Serializable {
 	private String last_name;
 	private String email;
 	private String password;
+	private Float solde;	
 	@Enumerated(EnumType.STRING)
 	private Level level;
-
-	@OneToMany(mappedBy = "trader")
+	@OneToMany(mappedBy = "trader",cascade={CascadeType.PERSIST	,CascadeType.REMOVE})
 	private List<Options> options_trader;
-	@OneToMany(mappedBy="counterparty")
+	@OneToMany(mappedBy="counterparty",cascade={CascadeType.PERSIST	,CascadeType.REMOVE})
     private List<Options> options_counterparty;
 	@OneToOne
 	private Portfolio portfolio;
@@ -42,19 +42,23 @@ public class Trader implements Serializable {
 	@OneToMany(mappedBy="trader",cascade={CascadeType.PERSIST,
 	CascadeType.REMOVE},fetch=FetchType.EAGER)
 	private List<Account> accounts;
-	private Float solde;
 	@OneToMany(mappedBy = "trader")
 	private List<StockOption> stockOptionsTrader;
 	@OneToMany(mappedBy="counterparty")
     private List<StockOption> stockOptionsCounterparty;
+    @OneToMany(mappedBy="trader")
+	private List<User> clients;
+	
+
 
 	public Trader() {
 		super();
 	}
 
 
+
 	    public Trader(String first_name, String last_name, String email, String password, Level level, Float solde) {
-		super();
+        super();
 		this.first_name = first_name;
 		this.last_name = last_name;
 		this.email = email;
@@ -62,7 +66,6 @@ public class Trader implements Serializable {
 		this.level = level;
 		this.solde = solde;
 	}
-
 
 	public Integer getId() {
 		return id;
@@ -113,8 +116,6 @@ public class Trader implements Serializable {
 	}
 
 
-
-	
 	public Portfolio getPortfolio() {
 		return portfolio;
 	}
@@ -145,6 +146,15 @@ public class Trader implements Serializable {
 
 	public void setOptions_counterparty(List<Options> options_counterparty) {
 		this.options_counterparty = options_counterparty;
+	}
+	
+
+	public List<User> getClients() {
+		return clients;
+	}
+
+	public void setClients(List<User> clients) {
+		this.clients = clients;
 	}
 
 	public List<StatusTrader> getAllStatus() {
@@ -183,7 +193,7 @@ public class Trader implements Serializable {
 	@Override
 	public String toString() {
 		return "Trader [first_name=" + first_name + ", last_name=" + last_name + ", email=" + email + ", password="
-				+ password + ", level=" + level + "]";
+				+ password + ", level=" + level + "solde= "+solde+"]";
 	}
 
 }

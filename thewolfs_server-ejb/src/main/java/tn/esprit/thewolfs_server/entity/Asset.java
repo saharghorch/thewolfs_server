@@ -20,13 +20,13 @@ public class Asset implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	
+	private String type;
 	
 	private java.sql.Date Option_Start_Date;
 	
 	private java.sql.Date  Options_Expiration_Date;
 	private  int Shares_number;
-	@OneToMany(mappedBy="asset")
+	@OneToMany(mappedBy="asset",cascade=CascadeType.REMOVE)
 	
 
 	private List<Options> options;
@@ -91,6 +91,14 @@ public class Asset implements Serializable {
 	}
 	public void setStock(Stock stock) {
 		this.stock = stock;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 	
 

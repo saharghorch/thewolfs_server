@@ -102,7 +102,10 @@ public class TraderService implements TraderServiceRemote {
 
 	@Override
 	public Trader findTraderById(Integer idTrader) {
+
 		return (em.find(Trader.class, idTrader));
 	}
+
+
 
 }

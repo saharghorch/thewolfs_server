@@ -37,9 +37,16 @@ public class Portfolio implements Serializable  {
 	
 	public Portfolio(Date creationDate) {
 		super();
-		this.creationDate = creationDate;}
+this.creationDate = creationDate;}
 
-	public Portfolio(Date creationDate, Float cash) {
+
+	
+	
+
+	
+
+	public Portfolio(Date creation_date, Float cash) {
+
 		super();
 		this.creationDate = creationDate;
 		this.cash = cash;
