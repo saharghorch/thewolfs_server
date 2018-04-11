@@ -36,16 +36,12 @@ public class Portfolio implements Serializable  {
 	public Portfolio(Date creation_date) {
 		super();
 		this.creation_date = creation_date;}
-
-	@OneToMany
+    //@OneToMany(mappedBy="portfolio",cascade=CascadeType.REMOVE)
+	@OneToMany 
 	private List<Options> allOptions;
 	
 
 	
-
-	
-	
-
 
 	public Portfolio(Date creation_date, Float cash) {
 		super();

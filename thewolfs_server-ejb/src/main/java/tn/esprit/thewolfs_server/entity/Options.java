@@ -35,6 +35,15 @@ public class Options implements Serializable {
 	@ManyToOne
 	private Asset asset;
 
+	
+	private Float stock_price;
+    private Float volatility;
+    private String time_to_expiry;
+
+	@ManyToOne
+	private Portfolio portfolio;
+
+
 	public Options() {
 		// TODO Auto-generated constructor stub
 	}
@@ -124,13 +133,57 @@ public class Options implements Serializable {
 	}
 
 
+
+
+	public Portfolio getPortfolio() {
+		return portfolio;
+	}
+
+
+	public void setPortfolio(Portfolio portfolio) {
+		this.portfolio = portfolio;
+	}
+
+
+	public Float getStock_price() {
+		return stock_price;
+	}
+
+
+	public void setStock_price(Float stock_price) {
+		this.stock_price = stock_price;
+	}
+
+
+	public Float getVolatility() {
+		return volatility;
+	}
+
+
+	public void setVolatility(Float volatility) {
+		this.volatility = volatility;
+	}
+
+
+	public String getTime_to_expiry() {
+		return time_to_expiry;
+	}
+
+
+	public void setTime_to_expiry(String string) {
+		this.time_to_expiry =string;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Options [id=" + id + ", premium_price=" + premium_price + ", strike_price=" + strike_price
 				+ ", expiration_date=" + expiration_date + ", type=" + type + ", status=" + status + ", user=" + user
-				+ ", trader=" + trader + ", counterparty=" + counterparty + ", asset=" + asset + "]";
+				+ ", trader=" + trader + ", counterparty=" + counterparty + ", asset=" + asset + ", stock_price="
+				+ stock_price + ", volatility=" + volatility + ", time_to_expiry=" + time_to_expiry + ", portfolio="
+				+ portfolio + "]";
 	}
-	
+
 	
 	
 	
