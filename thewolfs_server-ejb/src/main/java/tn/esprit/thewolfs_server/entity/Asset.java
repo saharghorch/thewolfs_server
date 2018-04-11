@@ -23,10 +23,12 @@ public class Asset implements Serializable {
 	private String type;
 	
 	private java.sql.Date Option_Start_Date;
-	
 	private java.sql.Date  Options_Expiration_Date;
 	private  int Shares_number;
-	@OneToMany(mappedBy="asset",cascade=CascadeType.REMOVE)
+	private int Trader_shares_number;
+	private Double Total_Value;
+	@OneToMany(mappedBy="asset")
+	//@OneToMany(mappedBy="asset",cascade=CascadeType.REMOVE)
 	
 
 	private List<Options> options;
@@ -80,6 +82,22 @@ public class Asset implements Serializable {
 		this.id = id;
 	}
 	
+	public int getTrader_shares_number() {
+		return Trader_shares_number;
+	}
+
+	public void setTrader_shares_number(int trader_shares_number) {
+		Trader_shares_number = trader_shares_number;
+	}
+
+	public Double getTotal_Value() {
+		return Total_Value;
+	}
+
+	public void setTotal_Value(Double total_Value) {
+		Total_Value = total_Value;
+	}
+
 	public List<Options> getOptions() {
 		return options;
 	}
