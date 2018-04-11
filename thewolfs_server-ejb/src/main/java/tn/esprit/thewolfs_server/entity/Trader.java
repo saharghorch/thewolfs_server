@@ -38,6 +38,8 @@ public class Trader implements Serializable {
 	private Watchlist watchlist;
 	@OneToMany(mappedBy="trader")
 	private List<Account> accounts;
+	@OneToMany(mappedBy="trader")
+	private List<User> clients;
 
 	public Trader() {
 		super();
@@ -147,6 +149,15 @@ public class Trader implements Serializable {
 
 	public void setOptions_counterparty(List<Options> options_counterparty) {
 		this.options_counterparty = options_counterparty;
+	}
+	
+
+	public List<User> getClients() {
+		return clients;
+	}
+
+	public void setClients(List<User> clients) {
+		this.clients = clients;
 	}
 
 	@Override
