@@ -22,25 +22,26 @@ public class Portfolio implements Serializable  {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	@Temporal(TemporalType.DATE)
-	private Date creation_date;
+	private Date creationDate;
 	private Float cash;
 	@OneToOne(mappedBy="portfolio")
 	private Trader trader;
 	@OneToMany(mappedBy="portfolio")
 	private List<Options> allOptions;
-	
+	@OneToMany(mappedBy="portfolio")
+	private List<StockOption> stockOptions;
 	
 	public Portfolio() {
 		super();
 	}
 	
-	public Portfolio(Date creation_date) {
+	public Portfolio(Date creationDate) {
 		super();
-		this.creation_date = creation_date;}
+		this.creationDate = creationDate;}
 
-	public Portfolio(Date creation_date, Float cash) {
+	public Portfolio(Date creationDate, Float cash) {
 		super();
-		this.creation_date = creation_date;
+		this.creationDate = creationDate;
 		this.cash = cash;
 
 	}
@@ -50,11 +51,11 @@ public class Portfolio implements Serializable  {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Date getCreation_date() {
-		return creation_date;
+	public Date getCreationDate() {
+		return creationDate;
 	}
-	public void setCreation_date(Date creation_date) {
-		this.creation_date = creation_date;
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
 	}
 	
 	
@@ -84,11 +85,18 @@ public class Portfolio implements Serializable  {
 	public void setAllOptions(List<Options> allOptions) {
 		this.allOptions = allOptions;
 	}
+	
+	public List<StockOption> getStockOptions() {
+		return stockOptions;
+	}
 
+	public void setStockOptions(List<StockOption> stockOptions) {
+		this.stockOptions = stockOptions;
+	}
 
 	@Override
 	public String toString() {
-		return "Portfolio [id=" + id + ", creation_date=" + creation_date + ", cash=" + cash + "]";
+		return "Portfolio [id=" + id + ", creation_date=" + creationDate + ", cash=" + cash + "]";
 	}
 	
 	

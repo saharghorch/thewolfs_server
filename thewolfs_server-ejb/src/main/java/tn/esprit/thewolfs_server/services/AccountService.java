@@ -73,6 +73,12 @@ public class AccountService implements AccountServiceRemote{
 		query.setParameter("currencyAccount",Currency.SAR); 
         return ((long)query.getSingleResult());
 	}
+	@Override
+	public List<Account> findAllAccountByTrader(Integer traderId) {
+		TypedQuery<Account> query=em.createQuery("select DISTINCT a from Account a join a.trader t where t.id=:traderId",Account.class);
+		query.setParameter("traderId",traderId);
+		return query.getResultList();
+	}
 	
 	
 	

@@ -20,6 +20,7 @@ public interface AccountServiceRemote {
 	public long numberAccountEUR();
 	public long numberAccountUSD();
 	public long numberAccountSAR();
+	public List<Account> findAllAccountByTrader(Integer traderId);
 
 
 }

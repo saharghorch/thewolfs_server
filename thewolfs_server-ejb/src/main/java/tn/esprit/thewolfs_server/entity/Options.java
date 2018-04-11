@@ -33,12 +33,8 @@ public class Options implements Serializable {
 	@ManyToOne
 	private Trader counterparty;
 	@ManyToOne
-
-    private Asset asset;
-
-
-
-	@ManyToOne
+	private Asset asset;
+    @ManyToOne
 	private Portfolio portfolio;
 
 	public Options() {

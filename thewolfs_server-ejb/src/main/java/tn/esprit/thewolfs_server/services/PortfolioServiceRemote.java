@@ -8,6 +8,7 @@ import tn.esprit.thewolfs_server.entity.Account;
 
 import tn.esprit.thewolfs_server.entity.Options;
 import tn.esprit.thewolfs_server.entity.Portfolio;
+import tn.esprit.thewolfs_server.entity.StockOption;
 
 @Remote
 public interface PortfolioServiceRemote {
@@ -20,6 +21,9 @@ public interface PortfolioServiceRemote {
 	public List<Portfolio> findPortfolioByCash(Float cashPortfolio);
 	public Portfolio findPortfolioById(int idPortfolio);
 	public void assignPortfolioToTrader(Integer idTrader,Integer idPortfolio);
+	public Portfolio getPortfolioById(Integer portfolioId);
+	public List<Options> findAllOptionsByTrader(Integer traderId);
+	public List<StockOption> findStockOptionsValid();
 	
 
 }

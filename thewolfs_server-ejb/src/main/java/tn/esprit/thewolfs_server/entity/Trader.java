@@ -43,20 +43,26 @@ public class Trader implements Serializable {
 	CascadeType.REMOVE},fetch=FetchType.EAGER)
 	private List<Account> accounts;
 	private Float solde;
+	@OneToMany(mappedBy = "trader")
+	private List<StockOption> stockOptionsTrader;
+	@OneToMany(mappedBy="counterparty")
+    private List<StockOption> stockOptionsCounterparty;
 
 	public Trader() {
 		super();
 	}
 
-	public Trader(String first_name, String last_name, String email, String password, Level level, Float solde) {
+
+	    public Trader(String first_name, String last_name, String email, String password, Level level, Float solde) {
 		super();
-        this.first_name = first_name;
+		this.first_name = first_name;
 		this.last_name = last_name;
 		this.email = email;
 		this.password = password;
 		this.level = level;
-		this.solde=solde;
+		this.solde = solde;
 	}
+
 
 	public Integer getId() {
 		return id;
@@ -164,6 +170,14 @@ public class Trader implements Serializable {
 
 	public void setAccounts(List<Account> accounts) {
 		this.accounts = accounts;
+	}
+	
+	public Float getSolde() {
+		return solde;
+	}
+
+	public void setSolde(Float solde) {
+		this.solde = solde;
 	}
 
 	@Override
