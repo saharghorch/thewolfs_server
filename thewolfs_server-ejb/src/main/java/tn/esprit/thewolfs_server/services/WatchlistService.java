@@ -150,6 +150,11 @@ EntityManager em;
 		
 		
 	}
+	@Override
+	public void updateWatchlist(Watchlist watchlist) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	}
 	

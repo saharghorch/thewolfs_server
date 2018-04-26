@@ -37,7 +37,7 @@ public class Options implements Serializable {
 	
 
 	private Double  stock_price;
-private Double riskFreeInterestRate;  
+    private Double riskFreeInterestRate;  
     private Double volatility;
 	private String evaluation;
 	private Double timeMoney;
