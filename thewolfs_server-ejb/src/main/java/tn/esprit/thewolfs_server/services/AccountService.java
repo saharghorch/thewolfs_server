@@ -11,7 +11,7 @@ import tn.esprit.thewolfs_server.entity.Account;
 import tn.esprit.thewolfs_server.entity.Currency;
 import tn.esprit.thewolfs_server.entity.Trader;
 @Stateless
-public class AccountService implements AccountServiceRemote{
+public class AccountService implements AccountServiceRemote,AccountServiceLocal{
 	@PersistenceContext(unitName="thewolfs_server-ejb")
 	EntityManager em;
 	@Override

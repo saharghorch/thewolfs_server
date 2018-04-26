@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+<ui:include src="/template/header.xhtml"/>
+<title><ui:insert name="title"></ui:insert></title>
+</h:head> 
+<body> 
+	<h:form id="form1">
+				<p:dataTable value="#{assetBean.listAsset}" paginator="true"
+					emptyMessage="No Data" resizableColumns="true"
+					selectionMode="single" rowKey="#{asset.id}"
+					paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5,10,15" var="asset" id="data" rows="10">
+					
+					<p:column headerText="Name ">
+						
+						<h:outputText value="#{asset.name}" />
+					</p:column>
+					
+					<p:column headerText="Shares Number"
+						filterBy="#{asset.Shares_number}"
+						sortBy="#{asset.Shares_number}">
+						<h:outputText value="#{asset.Shares_number}" />
+					</p:column>
+
+					<p:column headerText="Expiration Date " filterBy="#{asset.Options_Expiration_Date}"
+						sortBy="#{asset.Options_Expiration_Date}">
+						<h:outputText value="#{asset.Options_Expiration_Date}">
+						<f:convertDateTime pattern="yyyy-MM-dd " timeZone="GMT+1" />
+						</h:outputText>
+					</p:column>
+
+				<p:column headerText="Start Date "
+						>
+						<h:outputText value="#{asset.Option_Start_Date}">
+						<f:convertDateTime pattern="yyyy-MM-dd " timeZone="GMT+1" />
+						</h:outputText>
+					</p:column>
+
+		
+
+
+				</p:dataTable>
+
+			
+
+
+
+			</h:form>
+<ui:include src="/template/footer.xhtml"/>
+</body> 
+</html>

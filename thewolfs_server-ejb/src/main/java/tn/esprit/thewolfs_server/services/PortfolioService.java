@@ -6,9 +6,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-
-import tn.esprit.thewolfs_server.entity.Account;
-
 import tn.esprit.thewolfs_server.entity.Options;
 import tn.esprit.thewolfs_server.entity.Portfolio;
 import tn.esprit.thewolfs_server.entity.Status;
@@ -16,7 +13,7 @@ import tn.esprit.thewolfs_server.entity.StockOption;
 import tn.esprit.thewolfs_server.entity.Trader;
 
 @Stateless
-public class PortfolioService implements PortfolioServiceRemote {
+public class PortfolioService implements PortfolioServiceRemote,PortfolioServiceLocal {
 	@PersistenceContext(unitName = "thewolfs_server-ejb")
 	EntityManager em;
 

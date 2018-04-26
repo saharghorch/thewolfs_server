@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<ui:include src="/template/header.xhtml" />
+	<title><ui:insert name="title"></ui:insert></title>
+</h:head>
+<body>
+	<h:form id="form1">
+		<h:dataTable value="#{accountBean.listAccount}" var="account"
+			border="1">
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Amount" />
+				</f:facet>
+				<h:outputText value="#{account.amount}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Activity" />
+				</f:facet>
+				<h:outputText value="#{account.isActive}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Currency" />
+				</f:facet>
+				<h:outputText value="#{account.currency}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Delete Account" />
+				</f:facet>
+				<h:form>
+					<h:commandButton action="#{accountBean.deleteAccount(account.id)}"
+						value="delete" />
+				</h:form>
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Update Account" />
+				</f:facet>
+				<h:form>
+					<h:commandButton action="#{accountBean.modifierAccount(account)}"
+						value="update" />
+				</h:form>
+			</h:column>
+
+		</h:dataTable>
+
+		<h:form>
+			<h:panelGrid columns="2">
+
+				<h:outputText value="Amount:" />
+				<h:inputText value="#{accountBean.amount}" />
+
+				<h:outputText value="Activity" />
+				<h:selectOneMenu value="#{accountBean.isActive}">
+					<f:selectItem itemLabel="Choice" itemValue="" />
+					<f:selectItems value="#{activityBean.activities}" />
+				</h:selectOneMenu>
+
+				<h:outputText value="Currency" />
+				<h:selectOneMenu value="#{accountBean.currency}">
+					<f:selectItem itemLabel="Select currency" itemValue="" />
+					<f:selectItems value="#{currencyBean.currencies}" />
+				</h:selectOneMenu>
+
+				<h:commandButton action="#{accountBean.addAccount()}"
+					value="Ajouter" id="btn" />
+				<h:commandButton action="#{accountBean.updateAccount()}"
+					value="Update" />
+				<h:message for="btn" />
+			</h:panelGrid>
+		</h:form>
+	</h:form>
+
+
+
+	<ui:include src="/template/footer.xhtml" />
+</body>
+</html>

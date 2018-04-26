@@ -10,7 +10,7 @@ import javax.persistence.TypedQuery;
 import tn.esprit.thewolfs_server.entity.Asset;
 import tn.esprit.thewolfs_server.entity.Watchlist;
 @Stateless
-public class WatchlistService implements WatchlistServiceRemote {
+public class WatchlistService implements WatchlistServiceRemote,WatchlistServiceLocal {
 	
 @PersistenceContext(unitName="thewolfs_server-ejb")
 EntityManager em;

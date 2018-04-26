@@ -67,6 +67,18 @@ public class StockOption implements Serializable {
 		this.type = type;
 		this.status = status;
 	}
+	
+	
+
+	public StockOption(Double underlyingPrice, Double volatility, Double riskFreeInterestRate, String symbole,
+			Type type) {
+		super();
+		this.underlyingPrice = underlyingPrice;
+		this.volatility = volatility;
+		this.riskFreeInterestRate = riskFreeInterestRate;
+		this.symbole = symbole;
+		this.type = type;
+	}
 
 	public Integer getId() {
 		return id;

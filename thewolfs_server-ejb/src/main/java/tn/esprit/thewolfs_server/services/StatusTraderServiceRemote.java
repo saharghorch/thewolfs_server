@@ -12,4 +12,5 @@ public interface StatusTraderServiceRemote {
 	public void updateStatusTrader(StatusTrader statusTrader);
 	public void removeStatusTrader(Integer idStatusTrader);
 	public List<StatusTrader> displayAllStatus();
+	public StatusTrader findStatusTraderById(Integer idStatusTrader);
 }

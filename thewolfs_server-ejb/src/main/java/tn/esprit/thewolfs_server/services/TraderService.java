@@ -15,7 +15,7 @@ import tn.esprit.thewolfs_server.entity.Level;
 import tn.esprit.thewolfs_server.entity.Trader;
 
 @Stateless
-public class TraderService implements TraderServiceRemote {
+public class TraderService implements TraderServiceRemote,TraderServiceLocal {
 
 	@PersistenceContext(unitName = "thewolfs_server-ejb")
 	EntityManager em;

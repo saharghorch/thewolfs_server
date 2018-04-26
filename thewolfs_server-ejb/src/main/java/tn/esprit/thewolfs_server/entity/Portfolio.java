@@ -4,10 +4,8 @@ package tn.esprit.thewolfs_server.entity;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -45,9 +43,8 @@ this.creationDate = creationDate;}
 
 	
 
-	public Portfolio(Date creation_date, Float cash) {
-
-		super();
+	public Portfolio(Date creationDate, Float cash) {
+        super();
 		this.creationDate = creationDate;
 		this.cash = cash;
 

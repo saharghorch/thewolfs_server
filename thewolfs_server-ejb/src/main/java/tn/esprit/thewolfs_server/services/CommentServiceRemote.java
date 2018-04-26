@@ -13,4 +13,5 @@ public interface CommentServiceRemote {
 	public void updateComment(Comment comment);
 	public void removeComment(Integer idComment);
 	public List<Comment> displayAllComment();
+	public List<Comment> findAllStatusComment(Integer statusTraderId);
 }

@@ -10,7 +10,7 @@ import javax.persistence.TypedQuery;
 import tn.esprit.thewolfs_server.entity.StockOption;
 
 @Stateless
-public class StockOptionService implements StockOptionServiceRemote{
+public class StockOptionService implements StockOptionServiceRemote,StockOptionServiceLocal{
 	@PersistenceContext(unitName="thewolfs_server-ejb")
 	EntityManager em;
 	@Override

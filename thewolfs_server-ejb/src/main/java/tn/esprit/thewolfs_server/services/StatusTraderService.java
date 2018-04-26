@@ -3,6 +3,7 @@ package tn.esprit.thewolfs_server.services;
 import java.util.List;
 
 import javax.ejb.Singleton;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -10,7 +11,7 @@ import javax.persistence.TypedQuery;
 import tn.esprit.thewolfs_server.entity.Account;
 import tn.esprit.thewolfs_server.entity.StatusTrader;
 
-@Singleton
+@Stateless
 public class StatusTraderService implements StatusTraderServiceRemote {
 	@PersistenceContext(unitName="thewolfs_server-ejb")
 	EntityManager em;
@@ -36,6 +37,12 @@ public class StatusTraderService implements StatusTraderServiceRemote {
 	public List<StatusTrader> displayAllStatus() {
 		TypedQuery<StatusTrader> query=em.createQuery("SELECT s FROM StatusTrader s",StatusTrader.class);
 		return (query.getResultList());
+	}
+
+	@Override
+	public StatusTrader findStatusTraderById(Integer idStatusTrader) {
+		
+		return (em.find(StatusTrader.class, idStatusTrader));
 	}
 
 }

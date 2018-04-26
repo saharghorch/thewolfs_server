@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+<ui:include src="/template/header.xhtml"/>
+<title><ui:insert name="title"></ui:insert></title>
+</h:head> 
+<body> 
+<h:form id="form1">
+				<p:dataTable value="#{portfolioBean.listPortfolio}" paginator="true"
+					emptyMessage="No Data" resizableColumns="true"
+					selectionMode="single" rowKey="#{portfolio.id}"
+					paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5,10,15" var="portfolio" id="data" rows="10">
+					<!-- p:ajax event="rowSelect" listener="#{portfolioBean.onRowSelect}"
+						update="form1:evalId form1:probaId" /-->
+					<p:column headerText="id portfolio"
+						filterBy="#{portfolio.id}" sortBy="#{portfolio.id}">
+						<h:outputText value="#{portfolio.id}" />
+					</p:column>
+					<p:column headerText="Creation Date">
+						<h:outputText value="#{portfolio.creationDate}" />
+					</p:column>
+					<p:column headerText="Cash">
+						<h:outputText value="#{portfolio.cash}" />
+					</p:column>
+				</p:dataTable>
+			</h:form>
+<ui:include src="/template/footer.xhtml"/>
+</body> 
+</html>
