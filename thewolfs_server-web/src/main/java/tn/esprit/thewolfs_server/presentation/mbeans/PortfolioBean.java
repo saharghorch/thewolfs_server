@@ -42,12 +42,7 @@ public  void intialize() {
 
 
 public void onRowSelect(SelectEvent event){
-	/*options=(Options) event.getObject();
-	System.out.println("val options : ="+options.getId());
-	watchlistServiceLocal.calculprobabilite(options.getId());
-	watchlistServiceLocal.evaluer(options.getId());
-	System.out.println("val options-proba : ="+options.getSuccessProbability());
-	System.out.println("val options-eval : ="+options.getEvaluation());*/
+	portfolio=(Portfolio) event.getObject();
 }
 
 public Portfolio getPortfolio() {

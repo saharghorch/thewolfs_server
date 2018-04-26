@@ -1,7 +1,8 @@
 package tn.esprit.thewolfs_server.services;
 import javax.ejb.Remote;
+import javax.persistence.TypedQuery;
 
-
+import tn.esprit.thewolfs_server.entity.Account;
 import tn.esprit.thewolfs_server.entity.Asset;
 import tn.esprit.thewolfs_server.entity.Options;
 import tn.esprit.thewolfs_server.entity.Status;
@@ -36,6 +37,7 @@ void UpdateOptionCounterparty(int id, Trader c);
 public String TimeToExpiry (Date d);
 public Float FindAmountTrader (int id);
 public void UpdateAmount(int trader_id, float am);
+public List<Options> displayAllOptions();
 
 
 }

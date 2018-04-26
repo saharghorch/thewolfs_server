@@ -25,6 +25,7 @@ public interface TraderServiceRemote {
 	public long calculerLevel2();
 	public long calculerLevel3();
 	public List <Trader> loginQuery(String email,String password);
+	public Trader getTraderByEmailAndPassword(String login, String password);
 	
 }
 

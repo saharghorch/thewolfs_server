@@ -1,4 +1,5 @@
 package tn.esprit.thewolfs_server.presentation.mbeans;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,19 +10,14 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import org.primefaces.event.SelectEvent;
 
-
 import tn.esprit.thewolfs_server.entity.Account;
 import tn.esprit.thewolfs_server.entity.Activity;
 import tn.esprit.thewolfs_server.entity.Currency;
 import tn.esprit.thewolfs_server.services.AccountServiceLocal;
 
-
-
-
 @ManagedBean
 @ViewScoped
 public class AccountBean implements Serializable {
-	
 
 	private static final long serialVersionUID = 1L;
 	@EJB
@@ -32,115 +28,101 @@ public class AccountBean implements Serializable {
 	private Float amount;
 	private Currency currency;
 	private Activity isActive;
-	
-	 
-	
 
+	public AccountBean() {
+		listAccount = new ArrayList<>();
+	}
 
-public AccountBean() {
-	listAccount=new ArrayList<>();
-}	
+	@PostConstruct
+	public void intialize() {
+		listAccount = accountServiceLocal.displayAllAccounts();
+	}
 
-@PostConstruct
-public  void intialize() {
-	listAccount=accountServiceLocal.displayAllAccounts();
-}
+	public void addAccount() {
+		Account newAccount = new Account();
+		newAccount.setAmount(amount);
+		newAccount.setCurrency(currency);
+		newAccount.setIsActive(isActive);
+		accountServiceLocal.addAccount(newAccount);
+		reset();
+	}
 
+	public void reset() {
+		amount = 0.0f;
+	}
 
-public void addAccount()
-{
-	Account newAccount = new Account();
-	newAccount.setAmount(amount);
-	newAccount.setCurrency(currency);
-	newAccount.setIsActive(isActive);
-	accountServiceLocal.addAccount(newAccount);
-	reset();
-}
-public void reset()
-{
-	amount=0.0f;
-}
+	public void modifierAccount(Account account) {
+		id = account.getId();
+		amount = account.getAmount();
+		currency = account.getCurrency();
+		isActive = account.getIsActive();
+	}
 
-public void modifierAccount(Account account){
-	id =account.getId();
-	amount=account.getAmount();
-	currency=account.getCurrency();
-	isActive=account.getIsActive();	
-}
-public void updateAccount()
-{   Account newAccount = new Account();
-	newAccount.setId(id);
-	newAccount.setAmount(amount);
-	newAccount.setCurrency(currency);
-	newAccount.setIsActive(isActive);
-	accountServiceLocal.updateAccount(newAccount);
-	reset();	
-}
+	public void updateAccount() {
+		Account newAccount = new Account();
+		newAccount.setId(id);
+		newAccount.setAmount(amount);
+		newAccount.setCurrency(currency);
+		newAccount.setIsActive(isActive);
+		accountServiceLocal.updateAccount(newAccount);
+		reset();
+	}
 
-public void deleteAccount(Integer id)
-{
-	accountServiceLocal.removeAccount(id);
-}
+	public void deleteAccount(Integer id) {
+		accountServiceLocal.removeAccount(id);
+	}
 
-public void onRowSelect(SelectEvent event){
-   /*options=(Options) event.getObject();
-	System.out.println("val options : ="+options.getId());
-	watchlistServiceLocal.calculprobabilite(options.getId());
-	watchlistServiceLocal.evaluer(options.getId());
-	System.out.println("val options-proba : ="+options.getSuccessProbability());
-	System.out.println("val options-eval : ="+options.getEvaluation());*/
-}
+	public void onRowSelect(SelectEvent event) {
+		account = (Account) event.getObject();
 
-public Account getAccount() {
-	return account;
-}
+	}
 
-public void setAccount(Account account) {
-	this.account = account;
-}
+	public Account getAccount() {
+		return account;
+	}
 
-public List<Account> getListAccount() {
-	return accountServiceLocal.displayAllAccounts();
-}
+	public void setAccount(Account account) {
+		this.account = account;
+	}
 
-public void setListAccount(List<Account> listAccount) {
-	this.listAccount = listAccount;
-}
+	public List<Account> getListAccount() {
+		return accountServiceLocal.displayAllAccounts();
+	}
 
-public Integer getId() {
-	return id;
-}
+	public void setListAccount(List<Account> listAccount) {
+		this.listAccount = listAccount;
+	}
 
-public void setId(Integer id) {
-	this.id = id;
-}
+	public Integer getId() {
+		return id;
+	}
 
-public Float getAmount() {
-	return amount;
-}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-public void setAmount(Float amount) {
-	this.amount = amount;
-}
+	public Float getAmount() {
+		return amount;
+	}
 
-public Currency getCurrency() {
-	return currency;
-}
+	public void setAmount(Float amount) {
+		this.amount = amount;
+	}
 
-public void setCurrency(Currency currency) {
-	this.currency = currency;
-}
+	public Currency getCurrency() {
+		return currency;
+	}
 
-public Activity getIsActive() {
-	return isActive;
-}
+	public void setCurrency(Currency currency) {
+		this.currency = currency;
+	}
 
-public void setIsActive(Activity isActive) {
-	this.isActive = isActive;
-}
+	public Activity getIsActive() {
+		return isActive;
+	}
 
-
-
+	public void setIsActive(Activity isActive) {
+		this.isActive = isActive;
+	}
 
 }
-
