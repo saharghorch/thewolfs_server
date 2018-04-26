@@ -16,7 +16,7 @@ import tn.esprit.thewolfs_server.entity.Status;
 import tn.esprit.thewolfs_server.entity.Type;
 import tn.esprit.thewolfs_server.entity.Watchlist;
 @Stateless
-public class WatchlistService implements WatchlistServiceRemote,WatchlistServiceLocal {
+public class WatchlistService implements WatchlistServiceRemote {
 	
 @PersistenceContext(unitName="thewolfs_server-ejb")
 EntityManager em;
