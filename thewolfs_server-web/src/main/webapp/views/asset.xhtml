@@ -17,26 +17,33 @@
 					rowsPerPageTemplate="5,10,15" var="asset" id="data" rows="10">
 					
 					<p:column headerText="Name ">
-						
 						<h:outputText value="#{asset.name}" />
 					</p:column>
 					
+					
+				<p:column headerText="Shares Total Value"
+						filterBy="#{asset.totalValue}"
+						sortBy="#{asset.totalValue}">
+						<h:outputText value="#{asset.totalValue}" />
+					</p:column>	
+					
+					
 					<p:column headerText="Shares Number"
-						filterBy="#{asset.Shares_number}"
-						sortBy="#{asset.Shares_number}">
-						<h:outputText value="#{asset.Shares_number}" />
+						filterBy="#{asset.sharesNumber}"
+						sortBy="#{asset.sharesNumber}">
+						<h:outputText value="#{asset.sharesNumber}" />
 					</p:column>
 
-					<p:column headerText="Expiration Date " filterBy="#{asset.Options_Expiration_Date}"
-						sortBy="#{asset.Options_Expiration_Date}">
-						<h:outputText value="#{asset.Options_Expiration_Date}">
+					<p:column headerText="Expiration Date " filterBy="#{asset.optionExpirationDate}"
+						sortBy="#{asset.optionExpirationDate}">
+						<h:outputText value="#{asset.optionExpirationDate}">
 						<f:convertDateTime pattern="yyyy-MM-dd " timeZone="GMT+1" />
 						</h:outputText>
 					</p:column>
 
 				<p:column headerText="Start Date "
 						>
-						<h:outputText value="#{asset.Option_Start_Date}">
+						<h:outputText value="#{asset.optionStartDate}">
 						<f:convertDateTime pattern="yyyy-MM-dd " timeZone="GMT+1" />
 						</h:outputText>
 					</p:column>

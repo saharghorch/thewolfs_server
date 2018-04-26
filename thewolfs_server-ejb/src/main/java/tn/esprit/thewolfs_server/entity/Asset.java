@@ -1,34 +1,31 @@
 package tn.esprit.thewolfs_server.entity;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 public class Asset implements Serializable {
+
+
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer id;
-	private String type;
-	
-	private java.sql.Date Option_Start_Date;
-	private java.sql.Date  Options_Expiration_Date;
-	private  int Shares_number;
-	private int Trader_shares_number;
-	private Double Total_Value;
+	private Integer id;	
+	private java.sql.Date optionStartDate;
+	private java.sql.Date  optionExpirationDate;
+	private  int sharesNumber;
+	private int traderSharesNumber;
+	private String name;
+	private Double totalValue;
+	private Double sharesValue;
+
 	@OneToMany(mappedBy="asset")
-	//@OneToMany(mappedBy="asset",cascade=CascadeType.REMOVE)
 	
 
 	private List<Options> options;
@@ -36,88 +33,118 @@ public class Asset implements Serializable {
 	private Stock stock;
 	
 	
+	
+	
 	public Asset() {
 		super();
 	}
-	
-	public Asset(java.sql.Date option_Start_Date, java.sql.Date options_Expiration_Date, int shares_number
-			) {
-		super();
-		
-		Option_Start_Date = option_Start_Date;
-		Options_Expiration_Date = options_Expiration_Date;
-		Shares_number = shares_number;
-		
-	}
-	
-	
 
-	public Asset(int shares_number) {
+	public Asset(java.sql.Date optionStartDate, java.sql.Date optionExpirationDate, int sharesNumber) {
 		super();
-		Shares_number = shares_number;
+		this.optionStartDate = optionStartDate;
+		this.optionExpirationDate = optionExpirationDate;
+		this.sharesNumber = sharesNumber;
 	}
 
-	public java.sql.Date  getOption_Start_Date() {
-		return Option_Start_Date;
-	}
-	public void setOption_Start_Date(java.sql.Date  option_Start_Date) {
-		Option_Start_Date = option_Start_Date;
-	}
-	public java.sql.Date  getOptions_Expiration_Date() {
-		return Options_Expiration_Date;
-	}
-	public void setOptions_Expiration_Date(java.sql.Date  options_Expiration_Date) {
-		Options_Expiration_Date = options_Expiration_Date;
-	}
-	public int getShares_number() {
-		return Shares_number;
-	}
-	public void setShares_number(int shares_number) {
-		Shares_number = shares_number;
-	}
 	public Integer getId() {
 		return id;
 	}
+
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
-	public int getTrader_shares_number() {
-		return Trader_shares_number;
+
+
+	public java.sql.Date getOptionStartDate() {
+		return optionStartDate;
 	}
 
-	public void setTrader_shares_number(int trader_shares_number) {
-		Trader_shares_number = trader_shares_number;
+
+	public void setOptionStartDate(java.sql.Date optionStartDate) {
+		this.optionStartDate = optionStartDate;
 	}
 
-	public Double getTotal_Value() {
-		return Total_Value;
+
+	public java.sql.Date getOptionExpirationDate() {
+		return optionExpirationDate;
 	}
 
-	public void setTotal_Value(Double total_Value) {
-		Total_Value = total_Value;
+
+	public void setOptionExpirationDate(java.sql.Date optionExpirationDate) {
+		this.optionExpirationDate = optionExpirationDate;
 	}
+
+
+	public int getSharesNumber() {
+		return sharesNumber;
+	}
+
+
+	public void setSharesNumber(int sharesNumber) {
+		this.sharesNumber = sharesNumber;
+	}
+
+
+	public int getTraderSharesNumber() {
+		return traderSharesNumber;
+	}
+
+
+	public void setTraderSharesNumber(int traderSharesNumber) {
+		this.traderSharesNumber = traderSharesNumber;
+	}
+
+
+	public String getName() {
+		return name;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+	public Double getTotalValue() {
+		return totalValue;
+	}
+
+
+	public void setTotalValue(Double totalValue) {
+		this.totalValue = totalValue;
+	}
+
+
+	public Double getSharesValue() {
+		return sharesValue;
+	}
+
+
+	public void setSharesValue(Double sharesValue) {
+		this.sharesValue = sharesValue;
+	}
+
 
 	public List<Options> getOptions() {
 		return options;
 	}
+
+
 	public void setOptions(List<Options> options) {
 		this.options = options;
 	}
+
+
 	public Stock getStock() {
 		return stock;
 	}
+
+
 	public void setStock(Stock stock) {
 		this.stock = stock;
 	}
 
-	public String getType() {
-		return type;
-	}
 
-	public void setType(String type) {
-		this.type = type;
-	}
-	
 
 }

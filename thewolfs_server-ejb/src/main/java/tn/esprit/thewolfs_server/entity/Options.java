@@ -34,10 +34,11 @@ public class Options implements Serializable {
 	private Trader trader;
 	@ManyToOne
 	private Trader counterparty;
-	
+	@ManyToOne
+    private Asset asset;
 
 	private Double  stock_price;
-    private Double riskFreeInterestRate;  
+private Double riskFreeInterestRate;  
     private Double volatility;
 	private String evaluation;
 	private Double timeMoney;
@@ -45,14 +46,9 @@ public class Options implements Serializable {
     private Integer time_to_expiry;
 
 	@ManyToOne
-	private Asset asset;
-
-	
-
-	@ManyToOne
 	private Portfolio portfolio;
 
-
+	
 	public Options() {
 		// TODO Auto-generated constructor stub
 	}
@@ -250,6 +246,8 @@ public class Options implements Serializable {
 	public void setTime_to_expiry(Integer time_to_expiry) {
 		this.time_to_expiry = time_to_expiry;
 	}
+
+
 	public Portfolio getPortfolio() {
 		return portfolio;
 	}
@@ -260,6 +258,17 @@ public class Options implements Serializable {
 	}
 
 
+	@Override
+	public String toString() {
+		return "Options [id=" + id + ", premium_price=" + premium_price + ", strike_price=" + strike_price
+				+ ", expiration_date=" + expiration_date + ", type=" + type + ", status=" + status + ", user=" + user
+				+ ", trader=" + trader + ", counterparty=" + counterparty + ", asset=" + asset + "]";
+	}
 
 	
+	
+	
+	
+
+
 }

@@ -1,4 +1,4 @@
-package tn.esprit.thewolfs_server.services;
+ package tn.esprit.thewolfs_server.services;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import tn.esprit.thewolfs_server.entity.Asset;
 import tn.esprit.thewolfs_server.entity.Watchlist;
 
 @Stateless
-public class AssetServices implements AssetServiceRemote{
+public class AssetServices implements AssetServiceRemote , AssetServiceLocal{
 	
 	@PersistenceContext(unitName="thewolfs_server-ejb")
 	EntityManager em;
@@ -55,12 +55,22 @@ public class AssetServices implements AssetServiceRemote{
 		}
 
 
-		/*@Override
-		public List<Asset> displayAllAssets() {
-			TypedQuery<Asset> query=em.createQuery("SELECT c FROM Asset c",Asset.class);
-			return (query.getResultList());
+		@Override
+		public Integer getAccountbyTrader(Integer Traderid) {
+			TypedQuery<Integer> query=em.createQuery("SELECT c.id from Account c where c.id=:Traderid",Integer.class);
+			Integer  idAccount=query.setParameter("Traderid", Traderid).getSingleResult();
+			return  idAccount;
 		}
-*/
+
+
+		@Override
+		public Account getAccountById(Integer id_account) {
+			Account acc=em.find(Account.class,id_account);
+			return acc;
+		}
+
+
+		
 
 	
 		
