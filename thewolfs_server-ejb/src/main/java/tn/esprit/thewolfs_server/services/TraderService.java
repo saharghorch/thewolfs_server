@@ -11,6 +11,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+
 import tn.esprit.thewolfs_server.entity.Level;
 import tn.esprit.thewolfs_server.entity.Trader;
 
@@ -115,6 +116,14 @@ public class TraderService implements TraderServiceRemote,TraderServiceLocal {
 		Trader result = (Trader)q.getSingleResult();
 
 		return result;
+	}
+	public Trader getTraderByEmailAndPassword(String login, String password) {
+	/*	String jpql = "select e from Employe e where e.email=:email and e.password=:password";
+		TypedQuery<Employe> query = em.createQuery(jpql, Employe.class);
+		query.setParameter("email", login);
+		query.setParameter("password", password);
+		return query.getSingleResult();*/
+        return null;
 	}
 
 

@@ -47,7 +47,7 @@ public class OptionsManager implements OptionsRemote {
 import java.util.List;
 
 @Stateless
-public class OptionsManager implements OptionsRemote {
+public class OptionsManager implements OptionsRemote,OptionsLocal {
 	@PersistenceContext(unitName = "thewolfs_server-ejb")
 
 	EntityManager em;
@@ -164,4 +164,9 @@ public class OptionsManager implements OptionsRemote {
 		return query.getResultList();
 	}
 
+	@Override
+	public List<Options> displayAllOptions(){
+		TypedQuery<Options> query=em.createQuery("SELECT o FROM Options o",Options.class);
+		return (query.getResultList());
+	}
 }

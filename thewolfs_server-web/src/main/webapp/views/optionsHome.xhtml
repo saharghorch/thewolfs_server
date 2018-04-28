@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+<ui:include src="/template/header.xhtml"/>
+<title><ui:insert name="title"></ui:insert></title>
+</h:head> 
+<body> 
+
+<h:form id="form1">
+				<p:dataTable value="#{optionsBean.listOptions}" paginator="true"
+					emptyMessage="No Data" resizableColumns="true"
+					selectionMode="single" rowKey="#{options.id}"
+					paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5,10,15" var="options" id="data" rows="10">
+					<!-- p:ajax event="rowSelect" listener="#{optionsBean.onRowSelect}"
+						update="form1:evalId form1:probaId" /-->
+					<p:column headerText="id options"
+						filterBy="#{options.id}" sortBy="#{options.id}">
+						<h:outputText value="#{options.id}" />
+					</p:column>
+					<p:column headerText="premium_price">
+						<h:outputText value="#{options.premium_price}" />
+					</p:column>
+					<p:column headerText="strike_price">
+						<h:outputText value="#{options.strike_price}" />
+					</p:column>
+
+					<p:column headerText="expiration_date" >
+						<h:outputText value="#{options.expiration_date}" />
+					</p:column>
+
+					<p:column headerText="Type" >
+						<h:outputText value="#{options.type}" />
+					</p:column>
+					
+						<p:column headerText="Status" >
+						<h:outputText value="#{options.status}" />
+					</p:column>
+					
+						<p:column headerText="Delete Option">
+				<h:commandButton action="#{optionsBean.deleteOption(options.id)}"
+						value="delete" />
+			</p:column>
+			<p:column headerText="Update Option">
+					<h:commandButton action="#{optionsBean.modifierOption(options)}"
+						value="update" />
+			</p:column>
+				</p:dataTable>
+				
+			<h:form>
+				<h:panelGrid columns="2">
+
+					<h:outputText value="Premium Price" />
+					<h:inputText value="#{optionsBean.premiumPrice}" />
+					
+					<h:outputText value="Strike Price" />
+					<h:inputText value="#{optionsBean.strikePrice}" />
+
+					<h:outputText value="Status" />
+					<h:selectOneMenu value="#{optionsBean.status}">
+						<f:selectItem itemLabel="Choice" itemValue="" />
+						<f:selectItems value="#{statusBean.status}" />
+					</h:selectOneMenu>
+					
+						<h:outputText value="Type" />
+					<h:selectOneMenu value="#{optionsBean.type}">
+						<f:selectItem itemLabel="Choice" itemValue="" />
+						<f:selectItems value="#{typeBean.types}" />
+					</h:selectOneMenu>
+
+				
+
+					<h:commandButton action="#{optionsBean.addOption()}"
+						value="Ajouter" id="btn" />
+					<h:commandButton action="#{optionsBean.updateOption()}"
+						value="Update" />
+					<h:message for="btn" />
+				</h:panelGrid>
+			</h:form>
+	</h:form>
+			
+			
+<ui:include src="/template/footer.xhtml"/>
+</body> 
+</html>
