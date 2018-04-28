@@ -9,7 +9,7 @@
 <title><ui:insert name="title"></ui:insert></title>
 </h:head> 
 <body> 
-
+<div>
 <h:form id="form1">
 				<p:dataTable value="#{accountBean.listAccount}" paginator="true"
 					emptyMessage="No Data" resizableColumns="true"
@@ -38,6 +38,9 @@
 					</p:column>
 				</p:dataTable>
 			</h:form>
+			</div>
+
+
 			
 			
 <ui:include src="/template/footer.xhtml"/>

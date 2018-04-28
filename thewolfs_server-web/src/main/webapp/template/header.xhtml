@@ -118,8 +118,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<div class="login-inner">
 								<div class="login-top">
 								 <form action="#" method="post">
-									<input type="text" name="email" class="email" placeholder="Email" required=""/>
-									<input type="password" name="password" class="password" placeholder="Password" required=""/>	
+									<input type="text" value="#{loginTraderBean.login}" name="email" class="email" placeholder="Email" required=""/>
+									<input type="password" value="#{loginTraderBean.password}" name="password" class="password" placeholder="Password" required=""/>	
+										<h:commandButton action="#{loginTraderBean.doLogin()}" value="login" />
+		
 									<input type="checkbox" id="brand" value=""/>
 									<label for="brand"><span></span> Remember me</label>
 								</form>
@@ -179,9 +181,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="clearfix"></div>
 		    <!--banner-info-->
 			<div class="banner-info">
-			  <h1><a href="index.html">Trading <span class="logo-sub">Options</span> </a></h1>
+			  <h1><a href="#">Trading <span class="logo-sub">Options</span> </a></h1>
 			    <h2><span>Let us Help you </span> <span>make fortune </span></h2>
 				<p>Trading is our mission</p>
+				</div>
+				<!--
 			       <form action="#" method="post">
 					<div class="search-two">
 					<select id="country" onchange="change_country(this.value)" class="frm-field required">
@@ -220,7 +224,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<input type="submit" value="Find Option"/>
 					<div class="clearfix"></div>
 				</form>
-			</div>
+			</div> -->
 				<!--//banner-info-->	
 		</div>
 </div>

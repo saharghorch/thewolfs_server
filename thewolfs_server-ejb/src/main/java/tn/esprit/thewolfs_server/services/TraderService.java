@@ -16,7 +16,7 @@ import tn.esprit.thewolfs_server.entity.Level;
 import tn.esprit.thewolfs_server.entity.Trader;
 
 @Stateless
-public class TraderService implements TraderServiceRemote,TraderServiceLocal {
+public class TraderService implements TraderServiceRemote, TraderServiceLocal {
 
 	@PersistenceContext(unitName = "thewolfs_server-ejb")
 	EntityManager em;
@@ -109,14 +109,12 @@ public class TraderService implements TraderServiceRemote,TraderServiceLocal {
 
 	@Override
 	public Trader getTraderByEmailAndPassword(String login, String password) {
-	/*	String jpql = "select e from Employe e where e.email=:email and e.password=:password";
-		TypedQuery<Employe> query = em.createQuery(jpql, Employe.class);
+		String jpql = "select t from Trader t where t.email=:email and t.password=:password";
+		TypedQuery<Trader> query = em.createQuery(jpql, Trader.class);
 		query.setParameter("email", login);
 		query.setParameter("password", password);
-		return query.getSingleResult();*/
-  return null;
+		return query.getSingleResult();
+	
 	}
-
-
 
 }
