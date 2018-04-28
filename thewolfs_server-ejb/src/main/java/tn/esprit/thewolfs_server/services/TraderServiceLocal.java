@@ -20,5 +20,6 @@ public interface TraderServiceLocal {
 	public long calculerLevel2();
 	public long calculerLevel3();
 	public List <Trader> loginQuery(String email,String password);
+	public Trader login(String email,String password);
 	
 }

@@ -18,8 +18,7 @@ public interface TraderServiceRemote {
 	public void deleteTraderById(int traderId);
 	public List<Trader> dislayTrader();
 	public List<Trader> findTraderByName(String firstname);
-	public Trader findTraderById (Integer idTrader);
-
+	public Trader findTraderById(Integer idTrader);
 	public Trader Traderexiste(Trader trader);
 	public long calculerLevel1();
 	public long calculerLevel2();

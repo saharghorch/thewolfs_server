@@ -30,4 +30,7 @@ public interface UserServiceRemote {
 	boolean changePassword (String mail , String newpassword , String showedtoken ); 
 	void sendMailPassword (String mail , String contenu);
 	boolean sendRecover (String mail); 
+	//farah
+	User findUserById(Integer id);
+	Integer UpdateClient (User client);
 }

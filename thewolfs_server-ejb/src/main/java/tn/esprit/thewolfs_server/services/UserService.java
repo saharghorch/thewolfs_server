@@ -212,7 +212,7 @@ public class UserService implements UserServiceRemote {
 	public List <User> loginQuery(String email, String username, String password) {
 		TypedQuery q = entityManager.createQuery("Select x from User AS x where x.email = :mail and x.password = :pswd" , User.class);
 		q.setParameter("mail", email);  
-		q.setParameter("pswd", md5Hash(password)) ; 
+		q.setParameter("pswd", password) ; 
 		List <User> result =  q.getResultList();
 	
 		return result ;
@@ -272,6 +272,18 @@ public class UserService implements UserServiceRemote {
 		        System.out.println("send failed, exception: " + mex);
 		    }
 		
+	}
+
+	@Override
+	public User findUserById(Integer id) {
+	
+		return entityManager.find(User.class, id);
+	}
+
+	@Override
+	public Integer UpdateClient(User client) {
+		entityManager.merge(client);
+		return client.getId();
 	}
 
 
