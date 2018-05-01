@@ -20,8 +20,8 @@ public class Trader implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String firstName;
-	private String lastName;
+	private String first_name;
+	private String last_name;
 	private String email;
 	private String password;
 	private Float solde;	
@@ -57,8 +57,8 @@ public class Trader implements Serializable {
 
 	    public Trader(String first_name, String last_name, String email, String password, Level level, Float solde) {
         super();
-		this.firstName = first_name;
-		this.lastName = last_name;
+		this.first_name = first_name;
+		this.last_name = last_name;
 		this.email = email;
 		this.password = password;
 		this.level = level;
@@ -74,19 +74,19 @@ public class Trader implements Serializable {
 	}
 
 	public String getFirst_name() {
-		return firstName;
+		return first_name;
 	}
 
 	public void setFirst_name(String first_name) {
-		this.firstName = first_name;
+		this.first_name = first_name;
 	}
 
 	public String getLast_name() {
-		return lastName;
+		return last_name;
 	}
 
 	public void setLast_name(String last_name) {
-		this.lastName = last_name;
+		this.last_name = last_name;
 	}
 
 	public String getEmail() {
@@ -192,12 +192,6 @@ public class Trader implements Serializable {
 
 	@Override
 	public String toString() {
-		return firstName + " "+ lastName;
+		return first_name + " "+ last_name;
 	}
-
-
-
-
-	
-
 }

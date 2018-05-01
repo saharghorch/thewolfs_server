@@ -2,12 +2,18 @@ package tn.esprit.thewolfs_server.presentation.mbeans;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+
+import org.primefaces.PrimeFaces;
 import org.primefaces.event.SelectEvent;
 
 import tn.esprit.thewolfs_server.entity.Account;
@@ -24,6 +30,9 @@ public class AccountBean implements Serializable {
 	private AccountServiceLocal accountServiceLocal;
 	private Account account;
 	private List<Account> listAccount;
+	private List<Account> listAccounntByTrader;
+	private List<Account> accountsTrader;
+	private Integer idTrader;
 	private Integer id;
 	private Float amount;
 	private Currency currency;
@@ -31,11 +40,20 @@ public class AccountBean implements Serializable {
 
 	public AccountBean() {
 		listAccount = new ArrayList<>();
+		listAccounntByTrader=new ArrayList<>();
+		accountsTrader=new ArrayList<>();
+		idTrader=11;
 	}
 
 	@PostConstruct
 	public void intialize() {
 		listAccount = accountServiceLocal.displayAllAccounts();
+		accountsTrader=accountServiceLocal.findAllAccountByTrader(idTrader);
+		for(Account a:accountsTrader){
+			if(a.getIsActive().equals(Activity.Yes))
+				listAccounntByTrader.add(account);
+		}
+		
 	}
 
 	public void addAccount() {
@@ -76,7 +94,25 @@ public class AccountBean implements Serializable {
 		account = (Account) event.getObject();
 
 	}
+	 public void chooseAccount() {
+	        Map<String,Object> options = new HashMap<>();
+	        options.put("resizable", false);
+	        options.put("draggable", false);
+	        options.put("modal", true);
+	        PrimeFaces.current().dialog().openDynamic("selectAccount", options, null);
+	    }
+	     
+	    public void onAccountChosen(SelectEvent event) {
+			Account newAccount= (Account) event.getObject();
+	        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Account Selected", "Id:" + newAccount.getId()); 
+	        FacesContext.getCurrentInstance().addMessage(null, message);
+	    }
 
+	    
+	    public void selectaccountFromDialog(Account account) {
+	        PrimeFaces.current().dialog().closeDynamic(account);
+	    }  
+	    
 	public Account getAccount() {
 		return account;
 	}
@@ -124,5 +160,43 @@ public class AccountBean implements Serializable {
 	public void setIsActive(Activity isActive) {
 		this.isActive = isActive;
 	}
+	
+	public Account getAccountById(Integer id){
+		return accountServiceLocal.displayAccountById(id);
+	}
+
+	public AccountServiceLocal getAccountServiceLocal() {
+		return accountServiceLocal;
+	}
+
+	public void setAccountServiceLocal(AccountServiceLocal accountServiceLocal) {
+		this.accountServiceLocal = accountServiceLocal;
+	}
+
+	public List<Account> getListAccounntByTrader() {
+		return listAccounntByTrader;
+	}
+
+	public void setListAccounntByTrader(List<Account> listAccounntByTrader) {
+		this.listAccounntByTrader = listAccounntByTrader;
+	}
+
+	public Integer getIdTrader() {
+		return idTrader;
+	}
+
+	public void setIdTrader(Integer idTrader) {
+		this.idTrader = idTrader;
+	}
+
+	public List<Account> getAccountsTrader() {
+		return accountsTrader;
+	}
+
+	public void setAccountsTrader(List<Account> accountsTrader) {
+		this.accountsTrader = accountsTrader;
+	}
+	
+	
 
 }

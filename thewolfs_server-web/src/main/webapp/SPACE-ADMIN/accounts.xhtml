@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html" template="#{layoutMB.template}"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:adm="http://github.com/adminfaces"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+	<ui:define name="head-end">
+		<ui:param name="renderBreadCrumb" value="false" />
+	</ui:define>
+	<ui:define name="title">
+		<h2 class="align-center">Trading is our mission</h2>
+
+		<div align="right" style="width: 100px">
+			<h:form>
+				<p:clock displayMode="analog" />
+			</h:form>
+		</div>
+
+		<h3 style="margin-top: 0"></h3>
+		<p:clock />
+
+
+
+		<h:form>
+			<p:dataTable var="account" id="data"
+				value="#{accountBean.listAccount}" emptyMessage="No Data"
+				resizableColumns="true" selectionMode="single"
+				rowKey="#{account.id}"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+				paginator="true" rows="10" style="margin-bottom:20px"
+				rowsPerPageTemplate="5,10,15">
+
+				<p:column headerText="id account">
+					<h:outputText value="#{account.id}" />
+				</p:column>
+
+
+				<p:column headerText="Amount">
+					<h:outputText value="#{account.amount}" />
+				</p:column>
+
+				<p:column headerText="Currency">
+					<h:outputText value="#{account.currency}" />
+				</p:column>
+
+				<p:column headerText="Activity">
+					<h:outputText value="#{account.isActive}" />
+				</p:column>
+
+				<p:column headerText="Trader">
+					<h:outputText value="#{account.trader}" />
+				</p:column>
+
+
+			</p:dataTable>
+
+
+
+		</h:form>
+	</ui:define>
+</ui:composition>

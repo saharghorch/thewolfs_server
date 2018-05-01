@@ -108,13 +108,23 @@ public class TraderService implements TraderServiceRemote, TraderServiceLocal {
 	}
 
 	@Override
+	public Trader login(String email, String password) {
+		TypedQuery q = em.createQuery("Select x from Trader AS x where x.email = :mail and x.password = :pswd",
+				Trader.class);
+		q.setParameter("mail", email);
+		q.setParameter("pswd", password);
+		Trader result = (Trader)q.getSingleResult();
+
+		return result;
+	}
 	public Trader getTraderByEmailAndPassword(String login, String password) {
 		String jpql = "select t from Trader t where t.email=:email and t.password=:password";
 		TypedQuery<Trader> query = em.createQuery(jpql, Trader.class);
 		query.setParameter("email", login);
 		query.setParameter("password", password);
 		return query.getSingleResult();
-	
+
+
 	}
 
 }

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" template="#{layoutMB.template}">
+
+	<ui:define name="head-end">
+		<ui:param name="renderBreadCrumb" value="false" />
+	</ui:define>
+
+	<ui:define name="title">
+		<h2 class="align-center">Trading is our mission</h2>
+
+
+
+	
+		<h:form>
+			<p:dataTable var="account" id="data" value="#{accountBean.listAccounntByTrader}"
+				emptyMessage="No Data" resizableColumns="true"
+				selectionMode="single" rowKey="#{account.id}"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} "
+				paginator="true" rows="10" style="margin-bottom:20px"
+				rowsPerPageTemplate="5,10,15">
+
+				<p:column headerText="Amount">
+					<h:outputText value="#{account.amount}" />
+				</p:column>
+
+				<p:column headerText="Activity">
+					<h:outputText value="#{account.isActive}" />
+				</p:column>
+
+				<p:column headerText="Currency">
+					<h:outputText value="#{account.currency}" />
+				</p:column>
+
+				<p:column headerText="Select this Account">
+					<h:commandButton action="#{accountBean.modifierAccount(account)}"
+						value="Select Account" styleClass="btn-primary" />
+					<p:spacer width="5" />
+				</p:column>
+
+			</p:dataTable>
+
+		</h:form>
+	</ui:define>
+
+
+</ui:composition>

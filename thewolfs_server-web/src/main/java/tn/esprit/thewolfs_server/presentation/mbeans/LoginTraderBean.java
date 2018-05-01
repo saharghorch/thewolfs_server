@@ -1,56 +1,50 @@
 package tn.esprit.thewolfs_server.presentation.mbeans;
 
+import java.io.Serializable;
+
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
+
 import tn.esprit.thewolfs_server.entity.Trader;
+import tn.esprit.thewolfs_server.services.TraderService;
 import tn.esprit.thewolfs_server.services.TraderServiceLocal;
 
+
+
 @ManagedBean
-@RequestScoped
-public class LoginTraderBean {
-	@EJB
-	TraderServiceLocal traderServiceLocal;
+@SessionScoped
+public class LoginTraderBean implements Serializable {
+	private static final long serialVersionUID = 1L;
 
-	private String password;
-	private String login;
 	private Trader trader;
-	private boolean loggedIn;
+	private Trader TraderCurrent;
 	
-	public String doLogin()
-	{
-		String navigateTo = "";
-		trader = traderServiceLocal.getTraderByEmailAndPassword(login,password);
-		if(trader != null )
-		{
-			navigateTo = "/views/accountAdmin?face-redirect=true";
-			loggedIn = true;
-		}
-		else
-		{
-			FacesContext.getCurrentInstance().addMessage("form:btn", new FacesMessage("Bad credentials"));
-		}
-		return navigateTo;
+	private String message;
+	
+	public LoginTraderBean() {
+
+	}
+	@PostConstruct
+	public void initModel() {
+		trader = new Trader();
+	}
+	
+	public String getMessage() {
+		return message;
 	}
 
-	public String getPassword() {
-		return password;
+	public void setMessage(String message) {
+		this.message = message;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getLogin() {
-		return login;
-	}
-
-	public void setLogin(String login) {
-		this.login = login;
-	}
+	@EJB
+	TraderServiceLocal service;
 
 	public Trader getTrader() {
 		return trader;
@@ -59,14 +53,35 @@ public class LoginTraderBean {
 	public void setTrader(Trader trader) {
 		this.trader = trader;
 	}
-
-	public boolean isLoggedIn() {
-		return loggedIn;
-	}
-
-	public void setLoggedIn(boolean loggedIn) {
-		this.loggedIn = loggedIn;
-	}
 	
 	
+	public String DoLogin(){
+		String navigateTo=null;		
+		trader=service.login(trader.getEmail(), trader.getPassword());
+				if (trader!=null){
+			 navigateTo="/homeTrader?faces-redirect=true";	
+			 
+			 
+			 }
+				else message="Erreur D'authentification";
+				System.out.println(trader+"  Done");
+				return navigateTo;
+	}
+	public String doLogout() {
+		String navigateTo=null;
+		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+		navigateTo="/loginTrader?faces-redirect=true";
+		return navigateTo;
+	}
+	
+
+	
+	public Trader getTraderCurrent() {
+		return TraderCurrent;
+	}
+
+	public void setTraderCurrent(Trader TraderCurrent) {
+		TraderCurrent = TraderCurrent;
+	}
+
 }

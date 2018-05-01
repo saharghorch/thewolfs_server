@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html" template="#{layoutMB.template}"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:adm="http://github.com/adminfaces"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+	<ui:define name="head-end">
+		<ui:param name="renderBreadCrumb" value="false" />
+	</ui:define>
+
+	<ui:define name="title">
+		<h2 class="align-center">Trading is our mission</h2>
+		<h:form>
+			<p:dataTable var="portfolio" id="data"
+				value="#{portfolioBean.listPortfolio}" emptyMessage="No Data"
+				resizableColumns="true" selectionMode="single"
+				rowKey="#{portfolio.id}"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+				paginator="true" rows="10" style="margin-bottom:20px"
+				rowsPerPageTemplate="5,10,15">
+
+				<p:column headerText="id portfolio">
+					<h:outputText value="#{portfolio.id}" />
+				</p:column>
+
+
+				<p:column headerText="Creation Date">
+					<h:outputText value="#{portfolio.creationDate}" />
+				</p:column>
+
+				<p:column headerText="Cash Portfolio">
+					<h:outputText value="#{portfolio.cash}" />
+				</p:column>
+
+			</p:dataTable>
+
+			
+
+		</h:form>
+	</ui:define>
+</ui:composition>
