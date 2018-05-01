@@ -126,6 +126,29 @@ public class TraderService implements TraderServiceRemote,TraderServiceLocal {
         return null;
 	}
 
+	@Override
+	public List<Trader> findTraverLevel1() {
+		TypedQuery<Trader> query = em.createQuery("SELECT c FROM Trader c where c.level = :param ", Trader.class);
+		query.setParameter("param", Level.firstLevel);
+		return (query.getResultList());
+	}
+
+	@Override
+	public List<Trader> findTraverLevel2() {
+		TypedQuery<Trader> query = em.createQuery("SELECT c FROM Trader c where c.level = :param ", Trader.class);
+		query.setParameter("param", Level.secondLevel);
+		return (query.getResultList());
+
+	}
+
+	@Override
+	public List<Trader> findTraverLevel3() {
+		TypedQuery<Trader> query = em.createQuery("SELECT c FROM Trader c where c.level = :param ", Trader.class);
+		query.setParameter("param", Level.thirdLevel);
+		return (query.getResultList());
+
+	}
+
 
 
 }
