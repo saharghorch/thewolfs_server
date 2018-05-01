@@ -166,7 +166,7 @@ public class TraderBean implements Serializable{
 		level=trader.getLevel();
 		solde=trader.getSolde();
 		portfolio=trader.getPortfolio();
-	
+
 			
 	}
 	

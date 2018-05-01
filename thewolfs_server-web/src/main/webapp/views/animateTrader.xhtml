@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="#{layoutMB.template}">
+
+    <ui:define name="head-end">
+        <ui:param name="renderBreadCrumb" value="false"/>
+    </ui:define>
+
+    <ui:define name="title">
+        <h2 class="align-center">
+          Trading is our mission
+        </h2>
+        <p:spacer></p:spacer>
+<h:panelGrid columns="2"  style="width:100%">
+    <p:chart type="ohlc" model="#{animateTraderBean.animatedModel1}" style="width:625px;" />
+    <p:chart type="bar" model="#{animateTraderBean.animatedModel2}" style="width:625px;" />
+</h:panelGrid>
+
+  </ui:define>
+
+
+</ui:composition>

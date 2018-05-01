@@ -20,5 +20,8 @@ public interface TraderServiceLocal {
 	public List <Trader> loginQuery(String email,String password);
 	public Trader login(String email,String password);
 	public Trader getTraderByEmailAndPassword(String login, String password);
+	public List <Trader> findTraverLevel1();
+	public List <Trader> findTraverLevel2();
+	public List <Trader> findTraverLevel3();
 
 }

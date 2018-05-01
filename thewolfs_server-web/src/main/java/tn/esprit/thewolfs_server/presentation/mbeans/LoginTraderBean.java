@@ -59,7 +59,13 @@ public class LoginTraderBean implements Serializable {
 		String navigateTo=null;		
 		trader=service.login(trader.getEmail(), trader.getPassword());
 				if (trader!=null){
+<<<<<<< HEAD
 			 navigateTo="/SPACE-TRADER/homeTrader?faces-redirect=true";	
+=======
+
+			 navigateTo="/homeTrader?faces-redirect=true";	
+
+>>>>>>> branch 'master' of https://github.com/saharghorch/thewolfs_server.git
 			 
 			 
 			 }
