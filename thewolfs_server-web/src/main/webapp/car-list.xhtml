@@ -33,8 +33,7 @@
                         <p:commandButton value="Delete Selected" icon="fa fa-trash" styleClass="btn-danger"
                                          action="#{carListMB.delete}"
                                          disabled="#{empty carListMB.selectedCars or carListMB.selectedCars.size() == 0}"
-                                         process="@this" update="@form"
-                        >
+                                         process="@this" update="@form" >
                             <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-danger"/>
                         </p:commandButton>
                         <p:spacer width="5"/>

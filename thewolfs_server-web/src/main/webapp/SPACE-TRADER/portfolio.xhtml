@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html" template="#{layoutMB.template}"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:adm="http://github.com/adminfaces"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+	<ui:define name="head-end">
+		<ui:param name="renderBreadCrumb" value="false" />
+	</ui:define>
+
+	<ui:define name="title">
+		<h2 class="align-center">Trading is our mission</h2>
+		<div align="right" style="width: 100px">
+			<h:form>
+				<p:clock displayMode="analog" />
+			</h:form>
+		</div>
+
+		<h3 style="margin-top: 0"></h3>
+		<p:clock />
+
+		<h:form>
+			<div id="CRUD" class="" align="center">
+				<h:form>
+					<h:panelGrid columns="1">
+
+						<h:outputText value="Cash Portfolio (€):" />
+						<h:inputText value="#{portfolioBean.cash}" />
+
+						<h:outputText value="Creation Date:" />
+						<h:inputText value="#{portfolioBean.creationDate}" />
+
+
+					</h:panelGrid>
+				</h:form>
+			</div>
+
+		
+		<h:form>
+			<p:dataTable var="stockOption" id="data"
+				value="#{portfolioBean.listStockOption}" emptyMessage="No Data"
+				resizableColumns="true" selectionMode="single"
+				rowKey="#{stockOption.id}"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+				paginator="true" rows="10" style="margin-bottom:20px"
+				rowsPerPageTemplate="5,10,15">
+
+				<p:column headerText="Symbole">
+					<h:outputText value="#{stockOption.symbole}" />
+				</p:column>
+
+
+				<p:column headerText="Underlying Price (€)">
+					<h:outputText value="#{stockOption.underlyingPrice}" />
+				</p:column>
+
+				<p:column headerText="Volatility(%)">
+					<h:outputText value="#{stockOption.volatility}" />
+				</p:column>
+
+				<p:column headerText="Risk-Free Interest Rate(%)">
+					<h:outputText value="#{stockOption.riskFreeInterestRate}" />
+				</p:column>
+
+				<p:column headerText="Type">
+					<h:outputText value="#{stockOption.type}" />
+				</p:column>
+
+
+
+				<p:column headerText="Option Pricing">
+					<h:commandButton
+						action="#{portfolioBean.showStockOption(stockOption)}"
+						value="I want to price this Option" />
+				</p:column>
+
+			</p:dataTable>
+
+
+			<div id="CRUD" class="" align="center">
+				<h:form>
+					<p:growl id="msgs" showDetail="true" />
+					<h:panelGrid columns="2">
+
+
+						<p:outputLabel value="Strike Price" />
+						<p:inputText value="#{portfolioBean.strikePrice}" />
+
+						<p:outputLabel for="button" value="Expiration Date" />
+						<p:calendar id="button" value="#{portfolioBean.expirationDate}"
+							showOn="button" />
+
+
+
+						<p:column headerText="Option Pricing">
+							<h:commandButton action="#{portfolioBean.pricingOption()}"
+								value="Option Pricing" id="btn" update="msgs"
+								actionListener="#{portfolioBean.click}" icon="ui-icon-check" />
+						</p:column>
+
+					</h:panelGrid>
+					<p:column headerText="Premium Price (€)">
+						<h:outputText value="#{portfolioBean.premiumPrice}" />
+					</p:column>
+				</h:form>
+			</div>
+
+
+
+		</h:form>
+	</ui:define>
+</ui:composition>

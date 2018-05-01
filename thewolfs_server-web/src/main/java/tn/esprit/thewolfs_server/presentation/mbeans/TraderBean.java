@@ -24,11 +24,11 @@ public class TraderBean implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@EJB
 	private TraderServiceLocal traderServiceLocal;
+	//Travail Meriem
+	@EJB
+	private PortfolioServiceLocal portfolioServiceLocal;
 	private Trader trader;
 	private List<Trader> listTrader;
-	//Travail Meriem
-		@EJB
-		private PortfolioServiceLocal portfolioServiceLocal;
 	
 	private Integer id;
 	private String first_name;
@@ -110,6 +110,8 @@ public class TraderBean implements Serializable{
 		return serialVersionUID;
 	}
 	
+	
+	
 	public PortfolioServiceLocal getPortfolioServiceLocal() {
 		return portfolioServiceLocal;
 	}
@@ -122,7 +124,6 @@ public class TraderBean implements Serializable{
 	public void setPortfolio(Portfolio portfolio) {
 		this.portfolio = portfolio;
 	}
-	
 	public void addTrader()
 	{
 		Trader Trader = new Trader();
@@ -132,9 +133,8 @@ public class TraderBean implements Serializable{
 		Trader.setLevel(level);
 		Trader.setSolde(solde);
 		Trader.setPassword(password);
-		traderServiceLocal.addTrader(Trader);
 		
-
+		
 		//Travail Meriem
 	    Portfolio newPortfolio=new Portfolio();
 	    newPortfolio.setCash(0.0f);
@@ -150,7 +150,7 @@ public class TraderBean implements Serializable{
 		level=null;
 		solde=null;
 		password="";
-		
+	
 	        FacesContext.getCurrentInstance().addMessage(null,
 	                new FacesMessage("Welcome " + first_name + " " + last_name));
 	    
@@ -166,7 +166,7 @@ public class TraderBean implements Serializable{
 		level=trader.getLevel();
 		solde=trader.getSolde();
 		portfolio=trader.getPortfolio();
-		//traderServiceLocal.updateTrader(trader);
+
 			
 	}
 	

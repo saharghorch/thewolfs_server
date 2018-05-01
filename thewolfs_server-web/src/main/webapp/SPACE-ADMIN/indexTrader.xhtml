@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" template="#{layoutMB.template}">
+
+	<ui:define name="head-end">
+		<ui:param name="renderBreadCrumb" value="false" />
+	</ui:define>
+
+	<ui:define name="title">
+		<h2 class="align-center">Trading is our mission</h2>
+
+
+
+<h:form>
+			<p:panel id="panel" header="Add/Update Trader">
+
+				<p:messages id="msgs" />
+				<h:panelGrid columns="2" cellpadding="10">
+				
+				<p:outputLabel for="firstname" value="Firstname:" />
+					<p:inputText id="firstname" value="#{traderBean.first_name}"
+						label="firstname" required="true">
+						<f:validateLength minimum="5" />
+						<p:ajax update="msgfirstname" event="keyup" />
+					</p:inputText>
+					<p:message for="firstname" id="msgfirstname" display="icon" />
+					
+						
+					<br/>
+					
+					<p:outputLabel for="lastname" value="Lastname:" />
+					<p:inputText id="lastname" value="#{traderBean.last_name}"
+						label="Lastname" required="true">
+						<f:validateLength minimum="3" />
+						<p:ajax update="msgLastname" event="keyup" />
+					</p:inputText>
+					<p:message for="lastname" id="msgLastname" display="icon" />
+					
+					<br/>
+					
+					
+					<p:outputLabel for="email" value="Email" />
+					<p:inputText id="email" value="#{traderBean.email}"
+						label="Lastname" required="true">
+						<f:validateLength minimum="2" />
+						<p:ajax update="msgemail" event="keyup" />
+					</p:inputText>
+					<p:message for="email" id="msgemail" display="icon" />
+					
+					<br/>
+					
+					<p:outputLabel for="password" value="Password" />
+					<p:inputText id="password" value="#{traderBean.password}"
+						label="password" required="true">
+						<f:validateLength minimum="2" />
+						<p:ajax update="msgpassword" event="keyup" />
+					</p:inputText>
+					<p:message for="password" id="msgpassword" display="icon" />
+					
+					<br/>
+					
+					<p:outputLabel for="solde" value="Solde" />
+					<p:inputText id="solde" value="#{traderBean.solde}"
+						label="solde" required="true">
+						<f:validateLength minimum="2" />
+						<p:ajax update="msgsolde" event="keyup" />
+					</p:inputText>
+					<p:message for="solde" id="msgsolde" display="icon" />
+					
+					<br/>
+					<h:outputText value="Level" />
+										<h:selectOneMenu value="#{traderBean.level}">
+											<f:selectItem itemLabel="Selectionner le level" itemValue="firstlevel" />
+											<f:selectItems value="#{levelBean.levels}" />
+										</h:selectOneMenu>
+										<br/> <br/>
+					
+				</h:panelGrid>
+								<h:panelGrid columns="5" cellpadding="10">
+				
+				<br/><br/>
+				<p:commandButton value="Add Trader" update="panel" actionListener="#{traderBean. addTrader()}" icon="ui-icon-check"  styleClass="btn-primary"/>
+				<p:commandButton value="Update Trader" update="panel" actionListener="#{traderBean.updateTrader()}" icon="ui-icon-check"  styleClass="btn-primary"/>
+				<p:commandButton value="Reset" type="reset" styleClass="btn-primary" icon="ui-icon-check"  />
+				
+									
+  				</h:panelGrid>
+				</p:panel>
+		</h:form>
+
+
+	
+		<h:form>
+			<p:dataTable var="trader" id="data" value="#{traderBean.listTrader}"
+				emptyMessage="No Data" resizableColumns="true"
+				selectionMode="single" rowKey="#{trader.id}"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} "
+				paginator="true" rows="10" style="margin-bottom:20px"
+				rowsPerPageTemplate="5,10,15">
+
+
+				<p:column headerText="id trader">
+					<h:outputText value="#{trader.id}" />
+				</p:column>
+
+
+				<p:column headerText="First Name">
+					<h:outputText value="#{trader.first_name}" />
+				</p:column>
+
+				<p:column headerText="Last Name">
+					<h:outputText value="#{trader.last_name}" />
+				</p:column>
+
+				<p:column headerText="email">
+					<h:outputText value="#{trader.email}" />
+				</p:column>
+
+				<p:column headerText="Password">
+					<h:outputText value="#{trader.password}" />
+				</p:column>
+
+				<p:column headerText="solde">
+					<h:outputText value="#{trader.solde}" />
+				</p:column>
+
+
+				<p:column headerText="level">
+					<h:outputText value="#{trader.level}" />
+				</p:column>
+
+				<p:column headerText="Update">
+					<h:commandButton action="#{traderBean.modifierTrader(trader)}"
+						value="update" styleClass="btn-primary" />
+					<p:spacer width="5" />
+				</p:column>
+
+				<p:column headerText="Delete">
+					<h:commandButton icon="fa fa-trash" styleClass="btn-danger"
+						action="#{traderBean.deleteTrader(trader.id)}" value="delete">
+
+					</h:commandButton>
+					<p:spacer width="5" />
+				</p:column>
+
+			</p:dataTable>
+
+		</h:form>
+	</ui:define>
+
+
+</ui:composition>

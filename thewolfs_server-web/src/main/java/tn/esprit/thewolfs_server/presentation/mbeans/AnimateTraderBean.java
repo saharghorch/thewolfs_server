@@ -166,4 +166,5 @@ public class AnimateTraderBean implements Serializable {
 		return animatedModel1;
 	}
 
+
 }

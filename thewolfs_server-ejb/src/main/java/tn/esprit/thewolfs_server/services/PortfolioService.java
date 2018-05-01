@@ -13,7 +13,7 @@ import tn.esprit.thewolfs_server.entity.StockOption;
 import tn.esprit.thewolfs_server.entity.Trader;
 
 @Stateless
-public class PortfolioService implements PortfolioServiceRemote,PortfolioServiceLocal {
+public class PortfolioService implements PortfolioServiceRemote, PortfolioServiceLocal {
 	@PersistenceContext(unitName = "thewolfs_server-ejb")
 	EntityManager em;
 

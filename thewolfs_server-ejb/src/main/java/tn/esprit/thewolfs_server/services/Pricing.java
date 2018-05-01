@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
 import javax.ejb.Stateless;
 
 @Stateless
-public class Pricing implements PricingRemote {
+public class Pricing implements PricingRemote,PricingLocal {
 
 	@Override
 	public Double CallOptionPrice(Double s, Double x, Double sigma, Double r, Double t) {

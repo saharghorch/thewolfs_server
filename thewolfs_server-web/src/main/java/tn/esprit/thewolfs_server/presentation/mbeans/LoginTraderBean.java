@@ -59,7 +59,9 @@ public class LoginTraderBean implements Serializable {
 		String navigateTo=null;		
 		trader=service.login(trader.getEmail(), trader.getPassword());
 				if (trader!=null){
-			 navigateTo="/views/indexTrader?faces-redirect=true";	
+
+			 navigateTo="/homeTrader?faces-redirect=true";	
+
 			 
 			 
 			 }
