@@ -11,26 +11,54 @@
 
 	<ui:define name="title">
 		<h2 class="align-center">Trading is our mission</h2>
+		<div align="right" style="width: 100px">
+			<h:form>
+				<p:clock displayMode="analog" />
+			</h:form>
+		</div>
+
+		<h3 style="margin-top: 0"></h3>
+		<p:clock />
+		<p:tabMenu activeIndex="#{param.i}">
+			<p:menuitem value="Options" outcome="/SPACE-ADMIN/accounts" icon="ui-icon-star">
+				<f:param name="i" value="0" />
+			</p:menuitem>
+			<p:menuitem value="Accounts" outcome="/SPACE-ADMIN/accounts"
+				icon="ui-icon-search">
+				<f:param name="i" value="1" />
+			</p:menuitem>
+			<p:menuitem value="Portfolios" outcome="/SPACE-ADMIN/portfolios"
+				icon="ui-icon-document">
+				<f:param name="i" value="2" />
+			</p:menuitem>
+			<p:menuitem value="Traders" outcome="/SPACE-ADMIN/indexTrader"
+				icon="ui-icon-wrench">
+				<f:param name="i" value="3" />
+			</p:menuitem>
+			<p:menuitem value="Watchlists" outcome="/SPACE-ADMIN/accounts" icon="ui-icon-person">
+				<f:param name="i" value="4" />
+			</p:menuitem>
+		</p:tabMenu>
 
 
 
-<h:form>
+		<h:form>
 			<p:panel id="panel" header="Add/Update Trader">
 
 				<p:messages id="msgs" />
 				<h:panelGrid columns="2" cellpadding="10">
-				
-				<p:outputLabel for="firstname" value="Firstname:" />
+
+					<p:outputLabel for="firstname" value="Firstname:" />
 					<p:inputText id="firstname" value="#{traderBean.first_name}"
 						label="firstname" required="true">
 						<f:validateLength minimum="5" />
 						<p:ajax update="msgfirstname" event="keyup" />
 					</p:inputText>
 					<p:message for="firstname" id="msgfirstname" display="icon" />
-					
-						
-					<br/>
-					
+
+
+					<br />
+
 					<p:outputLabel for="lastname" value="Lastname:" />
 					<p:inputText id="lastname" value="#{traderBean.last_name}"
 						label="Lastname" required="true">
@@ -38,10 +66,10 @@
 						<p:ajax update="msgLastname" event="keyup" />
 					</p:inputText>
 					<p:message for="lastname" id="msgLastname" display="icon" />
-					
-					<br/>
-					
-					
+
+					<br />
+
+
 					<p:outputLabel for="email" value="Email" />
 					<p:inputText id="email" value="#{traderBean.email}"
 						label="Lastname" required="true">
@@ -49,9 +77,9 @@
 						<p:ajax update="msgemail" event="keyup" />
 					</p:inputText>
 					<p:message for="email" id="msgemail" display="icon" />
-					
-					<br/>
-					
+
+					<br />
+
 					<p:outputLabel for="password" value="Password" />
 					<p:inputText id="password" value="#{traderBean.password}"
 						label="password" required="true">
@@ -59,40 +87,48 @@
 						<p:ajax update="msgpassword" event="keyup" />
 					</p:inputText>
 					<p:message for="password" id="msgpassword" display="icon" />
-					
-					<br/>
-					
+
+					<br />
+
 					<p:outputLabel for="solde" value="Solde" />
-					<p:inputText id="solde" value="#{traderBean.solde}"
-						label="solde" required="true">
+					<p:inputText id="solde" value="#{traderBean.solde}" label="solde"
+						required="true">
 						<f:validateLength minimum="2" />
 						<p:ajax update="msgsolde" event="keyup" />
 					</p:inputText>
 					<p:message for="solde" id="msgsolde" display="icon" />
-					
-					<br/>
+
+					<br />
 					<h:outputText value="Level" />
-										<h:selectOneMenu value="#{traderBean.level}">
-											<f:selectItem itemLabel="Selectionner le level" itemValue="firstlevel" />
-											<f:selectItems value="#{levelBean.levels}" />
-										</h:selectOneMenu>
-										<br/> <br/>
-					
+					<h:selectOneMenu value="#{traderBean.level}">
+						<f:selectItem itemLabel="Selectionner le level"
+							itemValue="firstlevel" />
+						<f:selectItems value="#{levelBean.levels}" />
+					</h:selectOneMenu>
+					<br />
+					<br />
+
 				</h:panelGrid>
-								<h:panelGrid columns="5" cellpadding="10">
-				
-				<br/><br/>
-				<p:commandButton value="Add Trader" update="panel" actionListener="#{traderBean. addTrader()}" icon="ui-icon-check"  styleClass="btn-primary"/>
-				<p:commandButton value="Update Trader" update="panel" actionListener="#{traderBean.updateTrader()}" icon="ui-icon-check"  styleClass="btn-primary"/>
-				<p:commandButton value="Reset" type="reset" styleClass="btn-primary" icon="ui-icon-check"  />
-				
-									
-  				</h:panelGrid>
-				</p:panel>
+				<h:panelGrid columns="5" cellpadding="10">
+
+					<br />
+					<br />
+					<p:commandButton value="Add Trader" update="panel"
+						actionListener="#{traderBean. addTrader()}" icon="ui-icon-check"
+						styleClass="btn-primary" />
+					<p:commandButton value="Update Trader" update="panel"
+						actionListener="#{traderBean.updateTrader()}" icon="ui-icon-check"
+						styleClass="btn-primary" />
+					<p:commandButton value="Reset" type="reset"
+						styleClass="btn-primary" icon="ui-icon-check" />
+
+
+				</h:panelGrid>
+			</p:panel>
 		</h:form>
 
 
-	
+
 		<h:form>
 			<p:dataTable var="trader" id="data" value="#{traderBean.listTrader}"
 				emptyMessage="No Data" resizableColumns="true"

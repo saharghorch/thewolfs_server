@@ -59,7 +59,7 @@ public class LoginTraderBean implements Serializable {
 		String navigateTo=null;		
 		trader=service.login(trader.getEmail(), trader.getPassword());
 				if (trader!=null){
-			 navigateTo="/homeTrader?faces-redirect=true";	
+			 navigateTo="/SPACE-TRADER/homeTrader?faces-redirect=true";	
 			 
 			 
 			 }
@@ -70,7 +70,7 @@ public class LoginTraderBean implements Serializable {
 	public String doLogout() {
 		String navigateTo=null;
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-		navigateTo="/loginTrader?faces-redirect=true";
+		navigateTo="/SPACE-TRADER/loginTrader?faces-redirect=true";
 		return navigateTo;
 	}
 	
