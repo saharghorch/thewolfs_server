@@ -18,6 +18,6 @@ public interface AssetServiceLocal {
 	public List<Asset> displayAllAssets();
 	public Integer getAccountbyTrader(Integer Traderid);
 	public Account getAccountById(Integer id_account);
-
+   public  Double Calcul (Double TotalValue, int SharesNumber, int TraderSharesNumber );
 
 }

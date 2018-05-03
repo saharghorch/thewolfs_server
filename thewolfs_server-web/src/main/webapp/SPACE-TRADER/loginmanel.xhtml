@@ -1,0 +1,40 @@
+   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+     <body>
+                <h:form>
+                    <p class="login-box-msg">Sign in to start your session</p>
+                    <p:messages closable="true"/>
+
+                    <div class="form-group has-feedback">
+                        <p:inputText value="#{loginBean.mail}" type="email" styleClass="form-control" placeholder="Just type any value"
+                                     required="true"
+                                     requiredMessage="Email is required."/>
+                        <i class="fa fa-envelope form-control-feedback"></i>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <p:inputText value="#{loginBean.pass}" type="pass" styleClass="form-control"
+                                     placeholder="Just type any value" required="true"
+                                     requiredMessage="pass is required."/>
+                       <i class="fa fa-lock form-control-feedback" ></i>
+                    </div>
+                    <div class="row">
+                       
+                         <div class="col-xs-12">
+                            <p:commandButton styleClass="btn btn-success btn-block" action="#{loginBean.connexion()}" 
+                                             value="Sign In" update="@form"/>
+                             <p:commandButton styleClass="btn btn-success btn-block" action="#{loginBean.getBourses()}" 
+                                             value="Bourse" />
+                        </div>
+                    </div>
+                </h:form>
+
+            </body>
+          
+        
+        
+        </html>
+        

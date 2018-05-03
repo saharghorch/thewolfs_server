@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" template="#{layoutMB.template}">
+
+	<ui:define name="head-end">
+		<ui:param name="renderBreadCrumb" value="false" />
+	</ui:define>
+
+	<ui:define name="title">
+		<h2 class="align-center">Trading is our mission</h2>
+
+
+
+
+		<h:form id="form1">
+			<h3>Your amount :</h3>
+			<h:outputText value="#{optionsBean.myAmount()}" />
+
+
+			<p:dataTable value="#{optionsBean.mylistOptions}" paginator="true"
+				emptyMessage="No Data" resizableColumns="true"
+				selectionMode="single" rowKey="#{options.id}"
+				paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="5,10,15" var="options" id="data" rows="10">
+				<!-- p:ajax event="rowSelect" listener="#{optionsBean.onRowSelect}"
+						update="form1:evalId form1:probaId" /-->
+				<p:column headerText="id options" filterBy="#{options.id}"
+					sortBy="#{options.id}">
+					<h:outputText value="#{options.id}" />
+				</p:column>
+				<p:column headerText="premium_price">
+					<h:outputText value="#{options.premium_price}" />
+				</p:column>
+				<p:column headerText="strike_price">
+					<h:outputText value="#{options.strike_price}" />
+				</p:column>
+
+				<p:column headerText="expiration_date">
+					<h:outputText value="#{options.expiration_date}" />
+				</p:column>
+
+				<p:column headerText="Type">
+					<h:outputText value="#{options.type}" />
+				</p:column>
+
+				<p:column headerText="Status">
+					<h:outputText value="#{options.status}" />
+				</p:column>
+				<p:column headerText="Time To Expiry">
+					<h:outputText
+						value="#{optionsBean.TimeToExp(options.expiration_date)}" />
+				</p:column>
+				<p:column headerText="Result">
+					<h:outputText value="#{optionsBean.result(options)}" />
+				</p:column>
+				<p:column headerText="Exerce an option">
+					<h:commandButton value="Exerce"
+						disabled="#{options.result == 'Won' ? 'false':'true'}"
+						action="#{optionsBean.exerceOption(options)}" />
+				</p:column>
+
+			</p:dataTable>
+
+			<h:commandButton action="#{optionsBean.meAsTrader()}"
+				value="Me as a trader" />
+			<h:commandButton action="#{optionsBean.meAsCounterparty()}"
+				value="Me as a counterparty" />
+
+			<p:dataTable value="#{optionsBean.mylistOptionsEx}" paginator="true"
+				emptyMessage="No Data" resizableColumns="true"
+				selectionMode="single" rowKey="#{options.id}"
+				paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="5,10,15" var="options" id="data1" rows="10">
+				<!-- p:ajax event="rowSelect" listener="#{optionsBean.onRowSelect}"
+						update="form1:evalId form1:probaId" /-->
+				<p:column headerText="id options" filterBy="#{options.id}"
+					sortBy="#{options.id}">
+					<h:outputText value="#{options.id}" />
+				</p:column>
+				<p:column headerText="premium_price">
+					<h:outputText value="#{options.premium_price}" />
+				</p:column>
+				<p:column headerText="strike_price">
+					<h:outputText value="#{options.strike_price}" />
+				</p:column>
+
+				<p:column headerText="expiration_date">
+					<h:outputText value="#{options.expiration_date}" />
+				</p:column>
+
+				<p:column headerText="Type">
+					<h:outputText value="#{options.type}" />
+				</p:column>
+
+				<p:column headerText="Status">
+					<h:outputText value="#{options.status}" />
+				</p:column>
+				<p:column headerText="Time To Expiry">
+					<h:outputText
+						value="#{optionsBean.TimeToExp(options.expiration_date)}" />
+				</p:column>
+				<p:column headerText="Result">
+					<h:outputText value="#{optionsBean.result(options)}" />
+				</p:column>
+
+
+
+
+				</p:dataTable>
+			<h:form>
+				<h:panelGrid columns="2">
+
+					<h:outputText value="Premium Price" />
+					<h:inputText value="#{optionsBean.premiumPrice}" />
+					
+					<h:outputText value="Strike Price" />
+					<h:inputText value="#{optionsBean.strikePrice}" />
+					
+					<h:outputText value="Stock Price" />
+					<h:inputText value="#{optionsBean.stockPrice}" />
+					
+					<h:outputText value="Expiration Date" />
+					<h:inputText value="#{optionsBean.date}" >
+					<f:convertDateTime pattern="MM-dd-yyyy" type="date"/>
+					
+                    </h:inputText>
+					
+						<h:outputText value="Type" />
+					<h:selectOneMenu value="#{optionsBean.type}">
+						<f:selectItem itemLabel="Choice" itemValue="" />
+						<f:selectItems value="#{typeBean.types}" />
+					</h:selectOneMenu>
+
+				
+
+					<h:commandButton action="#{optionsBean.addOption()}"
+						value="Ajouter" id="btn" actionListener="#{optionsBean.warn()}" />
+					
+					<h:message for="btn" />
+				</h:panelGrid>
+			</h:form>
+
+
+		</h:form>
+
+	</ui:define>
+
+
+</ui:composition>
+
+

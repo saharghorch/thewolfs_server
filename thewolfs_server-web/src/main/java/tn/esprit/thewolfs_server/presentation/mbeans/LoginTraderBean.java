@@ -78,6 +78,7 @@ public class LoginTraderBean implements Serializable {
 		this.trader = trader;
 	}
 
+
 	public String getLogin() {
 		return login;
 	}
