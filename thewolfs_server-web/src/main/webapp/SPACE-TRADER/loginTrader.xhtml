@@ -3,16 +3,18 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html">
 <body>
+<div align="center">
 	<h:form>
 		<h:panelGrid columns="2">
 			<h:outputText value="login" />
-			<h:inputText value="#{loginTraderBean.trader.email}" />
+			<h:inputText value="#{loginTraderBean.login}" />
 			<h:outputText value="password"/>
-			<h:inputText value="#{loginTraderBean.trader.password}" />
-			<h:commandButton action="#{loginTraderBean.DoLogin()}" value="login"
+			<h:inputText value="#{loginTraderBean.password}" />
+			<h:commandButton action="#{loginTraderBean.doLogin()}" value="login"
 				id="btn" />
 			<h:message for="btn" />
 		</h:panelGrid>
 	</h:form>
+	</div>
 </body>
 </html>

@@ -5,46 +5,70 @@ import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 
-
 import tn.esprit.thewolfs_server.entity.Trader;
-import tn.esprit.thewolfs_server.services.TraderService;
 import tn.esprit.thewolfs_server.services.TraderServiceLocal;
-
-
 
 @ManagedBean
 @SessionScoped
 public class LoginTraderBean implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	@EJB
+	TraderServiceLocal traderServiceLocal;
 	private Trader trader;
-	private Trader TraderCurrent;
-	
-	private String message;
-	
-	public LoginTraderBean() {
+	private String login;
+	private String password;
+	public static Integer idTrader;
 
-	}
-	@PostConstruct
-	public void initModel() {
+	public LoginTraderBean() {
 		trader = new Trader();
 	}
+
+	@PostConstruct
+	public void initModel() {	
+	}
+
+	public String doLogin() {
+		String navigateTo = null;
+		trader = traderServiceLocal.login(login,password);
+		
+		if (trader != null) {
+			navigateTo="/SPACE-TRADER/homeTrader?faces-redirect=true&id=" + trader.getId();
 	
-	public String getMessage() {
-		return message;
+		}
+		idTrader=trader.getId();
+		return navigateTo;
+	}
+	
+	public String showPortfolio(){
+		String navigateTo = null;
+		trader = traderServiceLocal.login(login,password);
+		if (trader != null) {
+			navigateTo="/SPACE-TRADER/portfolio?faces-redirect=true&id=" + trader.getId();
+	
+		}
+
+		return navigateTo;
+		
 	}
 
-	public void setMessage(String message) {
-		this.message = message;
+	public String doLogout() {
+		String navigateTo = null;
+		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+		navigateTo = "/SPACE-TRADER/loginTrader?faces-redirect=true";
+		return navigateTo;
 	}
 
-	@EJB
-	TraderServiceLocal service;
+	public TraderServiceLocal getTraderServiceLocal() {
+		return traderServiceLocal;
+	}
+
+	public void setTraderServiceLocal(TraderServiceLocal traderServiceLocal) {
+		this.traderServiceLocal = traderServiceLocal;
+	}
 
 	public Trader getTrader() {
 		return trader;
@@ -53,41 +77,27 @@ public class LoginTraderBean implements Serializable {
 	public void setTrader(Trader trader) {
 		this.trader = trader;
 	}
-	
-	
-	public String DoLogin(){
-		String navigateTo=null;		
-		trader=service.login(trader.getEmail(), trader.getPassword());
-				if (trader!=null){
-<<<<<<< HEAD
-			 navigateTo="/SPACE-TRADER/homeTrader?faces-redirect=true";	
-=======
 
-			 navigateTo="/homeTrader?faces-redirect=true";	
-
->>>>>>> branch 'master' of https://github.com/saharghorch/thewolfs_server.git
-			 
-			 
-			 }
-				else message="Erreur D'authentification";
-				System.out.println(trader+"  Done");
-				return navigateTo;
-	}
-	public String doLogout() {
-		String navigateTo=null;
-		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-		navigateTo="/SPACE-TRADER/loginTrader?faces-redirect=true";
-		return navigateTo;
-	}
-	
-
-	
-	public Trader getTraderCurrent() {
-		return TraderCurrent;
+	public String getLogin() {
+		return login;
 	}
 
-	public void setTraderCurrent(Trader TraderCurrent) {
-		TraderCurrent = TraderCurrent;
+	public void setLogin(String login) {
+		this.login = login;
 	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
+	
 
 }

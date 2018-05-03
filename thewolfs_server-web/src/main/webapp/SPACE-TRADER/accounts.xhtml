@@ -24,7 +24,7 @@
 				icon="ui-icon-search">
 				<f:param name="i" value="1" />
 			</p:menuitem>
-			<p:menuitem value="Portfolio" outcome="/SPACE-TRADER/stock-option"
+			<p:menuitem value="Portfolio" outcome="/SPACE-TRADER/portfolio"
 				icon="ui-icon-document">
 				<f:param name="i" value="2" />
 			</p:menuitem>
@@ -36,10 +36,19 @@
 				icon="ui-icon-person">
 				<f:param name="i" value="4" />
 			</p:menuitem>
+	
 		</p:tabMenu>
+		<div align="right" style="width: 100px">
+			<h:form>
+				<p:clock displayMode="analog" />
+			</h:form>
+		</div>
+
+		<h3 style="margin-top: 0"></h3>
+		<p:clock />
 		<h:form>
 			<p:dataTable var="account" id="data"
-				value="#{accountBean.listAccount}" emptyMessage="No Data"
+				value="#{accountBean.accountsTrader}" emptyMessage="No Data"
 				resizableColumns="true" selectionMode="single"
 				rowKey="#{account.id}"
 				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"

@@ -53,6 +53,7 @@ public class PortfolioBean implements Serializable {
 	private Double volatility;
 	private Double riskFreeInterestRate;
 	private Type type;
+	private Integer idTrader=LoginTraderBean.idTrader;
 
 	public PortfolioBean() {
 		listPortfolio = new ArrayList<>();
@@ -65,7 +66,6 @@ public class PortfolioBean implements Serializable {
 		listPortfolio = portfolioServiceLocal.displayAllPortfolios();
 		listStockOption = portfolioServiceLocal.findStockOptionsValid();
 		// Déclaration statique idTrader
-		Integer idTrader = 11;
 		Trader trader = traderServiceLocal.findTraderById(idTrader);
 		portfolio = trader.getPortfolio();
 		cash = portfolio.getCash();
@@ -88,6 +88,7 @@ public class PortfolioBean implements Serializable {
 		Date todayDate = cal.getTime();
 		long z = pricingLocal.getDateDiff(todayDate, expirationDate, TimeUnit.DAYS);
 		Double timeToExpiration = (double) z / 365;
+		System.out.println("Temps Expiration"+timeToExpiration);
 
 		if (type.equals(Type.Call)) {
 			premiumPrice = pricingLocal.CallOptionPrice(underlyingPrice, strikePrice, volatility, riskFreeInterestRate,
@@ -246,5 +247,15 @@ public class PortfolioBean implements Serializable {
 	public void setPremiumPrice(Double premiumPrice) {
 		this.premiumPrice = premiumPrice;
 	}
+
+	public Integer getIdTrader() {
+		return idTrader;
+	}
+
+	public void setIdTrader(Integer idTrader) {
+		this.idTrader = idTrader;
+	}
+	
+	
 
 }

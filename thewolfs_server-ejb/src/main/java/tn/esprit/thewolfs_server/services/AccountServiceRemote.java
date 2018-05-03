@@ -21,6 +21,7 @@ public interface AccountServiceRemote {
 	public long numberAccountUSD();
 	public long numberAccountSAR();
 	public List<Account> findAllAccountByTrader(Integer traderId);
+	public List<Account> findActiveAccountByTrader(Integer traderId);
 
 
 }

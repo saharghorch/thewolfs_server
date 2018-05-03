@@ -1,5 +1,6 @@
 package tn.esprit.thewolfs_server.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -8,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import tn.esprit.thewolfs_server.entity.Account;
+import tn.esprit.thewolfs_server.entity.Activity;
 import tn.esprit.thewolfs_server.entity.Currency;
 import tn.esprit.thewolfs_server.entity.Trader;
 @Stateless
@@ -78,6 +80,18 @@ public class AccountService implements AccountServiceRemote,AccountServiceLocal{
 		TypedQuery<Account> query=em.createQuery("select DISTINCT a from Account a join a.trader t where t.id=:traderId",Account.class);
 		query.setParameter("traderId",traderId);
 		return query.getResultList();
+	}
+	
+	public List<Account> findActiveAccountByTrader(Integer traderId){
+		TypedQuery<Account> query=em.createQuery("select DISTINCT a from Account a join a.trader t where t.id=:traderId",Account.class);
+		query.setParameter("traderId",traderId);
+		List <Account> accounts=query.getResultList();
+		List <Account> accountsTrader= new ArrayList<>();
+		for (Account account : accounts) {
+			if (account.getIsActive().equals(Activity.Yes))
+				accountsTrader.add(account);
+		}
+		return accountsTrader;
 	}
 	
 	

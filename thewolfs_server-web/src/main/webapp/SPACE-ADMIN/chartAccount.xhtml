@@ -3,7 +3,6 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html" template="#{layoutMB.template}"
-	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:adm="http://github.com/adminfaces"
 	xmlns:of="http://omnifaces.org/functions"
@@ -12,9 +11,9 @@
 	<ui:define name="head-end">
 		<ui:param name="renderBreadCrumb" value="false" />
 	</ui:define>
+
 	<ui:define name="title">
 		<h2 class="align-center">Trading is our mission</h2>
-
 		<div align="right" style="width: 100px">
 			<h:form>
 				<p:clock displayMode="analog" />
@@ -45,43 +44,18 @@
 				<f:param name="i" value="4" />
 			</p:menuitem>
 		</p:tabMenu>
+		<p:spacer></p:spacer>
+		<h:panelGrid columns="2" style="width:100%">
+			<p:chart type="line" model="#{chartAccountBean.animatedModel1}"
+				style="width:500px;" />
+			<p:chart type="bar" model="#{chartAccountBean.animatedModel2}"
+				style="width:500px;" />
+				<p:chart type="line" model="#{chartAccountBean.animatedModel1}"
+				style="width:500px;" />
+			<p:chart type="bar" model="#{chartAccountBean.animatedModel2}"
+				style="width:500px;" />
+		</h:panelGrid>
 
-
-		<h:form>
-			<p:dataTable var="account" id="data"
-				value="#{accountBean.listAccount}" emptyMessage="No Data"
-				resizableColumns="true" selectionMode="single"
-				rowKey="#{account.id}"
-				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
-				paginator="true" rows="10" style="margin-bottom:20px"
-				rowsPerPageTemplate="5,10,15">
-
-				<p:column headerText="id account">
-					<h:outputText value="#{account.id}" />
-				</p:column>
-
-
-				<p:column headerText="Amount">
-					<h:outputText value="#{account.amount}" />
-				</p:column>
-
-				<p:column headerText="Currency">
-					<h:outputText value="#{account.currency}" />
-				</p:column>
-
-				<p:column headerText="Activity">
-					<h:outputText value="#{account.isActive}" />
-				</p:column>
-
-				<p:column headerText="Trader">
-					<h:outputText value="#{account.trader}" />
-				</p:column>
-
-
-			</p:dataTable>
-
-
-
-		</h:form>
 	</ui:define>
+
 </ui:composition>

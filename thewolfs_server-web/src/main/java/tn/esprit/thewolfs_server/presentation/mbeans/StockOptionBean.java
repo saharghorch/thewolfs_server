@@ -10,23 +10,19 @@ import java.util.concurrent.TimeUnit;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 
-
-
+import tn.esprit.thewolfs_server.entity.Account;
 import tn.esprit.thewolfs_server.entity.StockOption;
 import tn.esprit.thewolfs_server.entity.Type;
 import tn.esprit.thewolfs_server.services.PricingLocal;
 import tn.esprit.thewolfs_server.services.StockOptionServiceLocal;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.faces.application.FacesMessage;
 
 import javax.faces.context.FacesContext;
- 
-import org.primefaces.PrimeFaces;
-import org.primefaces.event.SelectEvent;
 
 @ManagedBean
 @ViewScoped
@@ -42,28 +38,29 @@ public class StockOptionBean implements Serializable {
 	private PricingLocal pricingLocal;
 	private StockOption stockOption;
 	private List<StockOption> listStockOption;
-	private Double strikePrice;
+	private Double strikePrice=null;
 	private Date expirationDate;
 	private Integer id;
 	private String symbole;
 	private Double underlyingPrice;
 	private Double volatility;
 	private Double riskFreeInterestRate;
-	private Double premiumPrice;
+	public Double premiumPrice;
 	private Type type;
 	private Boolean buyOption;
+	private String message;
+	public static Double priceOptionStatic;
 
 	public StockOptionBean() {
 		listStockOption = new ArrayList<>();
-		
+
 	}
 
 	@PostConstruct
 	public void intialize() {
 		listStockOption = stockOptionServiceLocal.displayAllStockOptions();
-		expirationDate=new Date();
-		strikePrice=null;
-		premiumPrice=null;
+		
+
 	}
 
 	public void showStockOption(StockOption stockOption) {
@@ -72,48 +69,46 @@ public class StockOptionBean implements Serializable {
 		underlyingPrice = stockOption.getUnderlyingPrice();
 		volatility = stockOption.getVolatility();
 		riskFreeInterestRate = stockOption.getRiskFreeInterestRate();
-		type=stockOption.getType();
+		type = stockOption.getType();
+		premiumPrice=0.0d;
 		expirationDate=new Date();
-		strikePrice=null;
-		premiumPrice=null;
-		
 
 	}
-	
-	public void pricingOption(){
-		Calendar cal = Calendar.getInstance ();
-        Date todayDate = cal.getTime();
-  		long z = pricingLocal.getDateDiff(todayDate, expirationDate, TimeUnit.DAYS);
-  		Double timeToExpiration = (double) z / 365;
-	
+
+	public void pricingOption(Type typeOption) {
+		System.out.println("hi");
+		System.out.println("strike price is "+strikePrice+" under"+underlyingPrice+" vol "+volatility+" risk"+riskFreeInterestRate+"exp "+expirationDate);
+		 Calendar cal = Calendar.getInstance ();
+		 Date todayDate = cal.getTime();
+		 long z = pricingLocal.getDateDiff(todayDate, expirationDate,TimeUnit.DAYS);
+		 Double timeToExpiration = (double) z / 365;
+		 System.out.println("time to expiration " +timeToExpiration);
 		
-		if(type.equals(Type.Call)){
-			premiumPrice=pricingLocal.CallOptionPrice(underlyingPrice,strikePrice,volatility, riskFreeInterestRate,timeToExpiration);
-		}
-		else{
-			premiumPrice=pricingLocal.PutOptionPrice(underlyingPrice,strikePrice,volatility, riskFreeInterestRate,timeToExpiration);
-		}
-		
-		expirationDate=new Date();
-		strikePrice=null;
+		 if(typeOption.equals(Type.Call)){
+			 System.out.println("cest un call");
+			 System.out.println("Avant calcul"+"under "+underlyingPrice+"strike "+strikePrice+"vol"+volatility+"risk "+riskFreeInterestRate+"time "+timeToExpiration);
+		 premiumPrice=pricingLocal.CallOptionPrice(underlyingPrice,strikePrice,volatility/100,riskFreeInterestRate/100,timeToExpiration);
+		 }
+		 else{
+			 System.out.println("cest un put");
+		 premiumPrice=pricingLocal.PutOptionPrice(strikePrice,underlyingPrice,volatility/100,riskFreeInterestRate/100,timeToExpiration);
+		 }
+		 System.out.println(premiumPrice);
+		 priceOptionStatic=premiumPrice;
 	
-		
-	
-		
+
 	}
-	
-	  
-    public void onDateSelect(SelectEvent event) {
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
-    }
-     
-    public void click() {
-        PrimeFaces.current().ajax().update("form:display");
-        PrimeFaces.current().executeScript("PF('dlg').show()");
-    }
-	
+
+	public String openOther() {
+		String navigateTo = null;
+		if (premiumPrice != 0) {
+			navigateTo = "/SPACE-TRADER/buyOption?faces-redirect=true";
+
+		} else
+			message = "Erreur D'authentification";
+		System.out.println("  Done: price :" + premiumPrice);
+		return navigateTo;
+	}
 	
 
 
@@ -197,13 +192,6 @@ public class StockOptionBean implements Serializable {
 		this.riskFreeInterestRate = riskFreeInterestRate;
 	}
 
-	public Double getPremiumPrice() {
-		return premiumPrice;
-	}
-
-	public void setPremiumPrice(Double premiumPrice) {
-		this.premiumPrice = premiumPrice;
-	}
 
 	public Type getType() {
 		return type;
@@ -228,15 +216,32 @@ public class StockOptionBean implements Serializable {
 	public void setBuyOption(Boolean buyOption) {
 		this.buyOption = buyOption;
 	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public Double getPremiumPrice() {
+		return premiumPrice;
+	}
+
+	public void setPremiumPrice(Double premiumPrice) {
+		this.premiumPrice = premiumPrice;
+	}
+
+	public static Double getPriceOptionStatic() {
+		return priceOptionStatic;
+	}
+
+	public static void setPriceOptionStatic(Double priceOptionStatic) {
+		StockOptionBean.priceOptionStatic = priceOptionStatic;
+	}
 	
-	  public void destroyWorld() {
-	        addMessage("System Error", "Please try again later.");
-	    }
-	     
-	    public void addMessage(String summary, String detail) {
-	        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
-	        FacesContext.getCurrentInstance().addMessage(null, message);
-	    }
+	
 	
 	
 

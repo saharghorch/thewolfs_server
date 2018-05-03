@@ -23,9 +23,8 @@
 				icon="ui-icon-search">
 				<f:param name="i" value="1" />
 			</p:menuitem>
-			<p:menuitem value="Portfolio" outcome="/SPACE-TRADER/stock-option"
-				icon="ui-icon-document">
-				<f:param name="i" value="2" />
+			<p:menuitem value="Portfolio" outcome="/SPACE-TRADER/portfolio"
+				icon="ui-icon-document" action="#{loginTraderBean.showPortfolio()}">
 			</p:menuitem>
 			<p:menuitem value="Support" outcome="/SPACE-TRADER/accounts"
 				icon="ui-icon-wrench">
