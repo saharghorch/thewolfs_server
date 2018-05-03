@@ -37,7 +37,7 @@ public class AssetServices implements AssetServiceRemote , AssetServiceLocal{
 		public void updateAsset(Asset asset) {
 			
 			em.merge(asset);
-		}
+		} 
 
 
 		@Override
@@ -67,6 +67,13 @@ public class AssetServices implements AssetServiceRemote , AssetServiceLocal{
 		public Account getAccountById(Integer id_account) {
 			Account acc=em.find(Account.class,id_account);
 			return acc;
+		}
+
+
+		@Override
+		public Double Calcul(Double TotalValue, int SharesNumber, int TraderSharesNumber) {
+			
+			 return((TraderSharesNumber*TotalValue)/SharesNumber);
 		}
 
 

@@ -44,6 +44,8 @@ private Double riskFreeInterestRate;
 	private Double timeMoney;
 	private Double successProbability;
     private Integer time_to_expiry;
+    private Integer exerce;
+    private String result;
 
 	@ManyToOne
 	private Portfolio portfolio;
@@ -255,6 +257,27 @@ private Double riskFreeInterestRate;
 
 	public void setPortfolio(Portfolio portfolio) {
 		this.portfolio = portfolio;
+	}
+	
+
+
+	public Integer getExerce() {
+		return exerce;
+	}
+
+
+	public void setExerce(Integer exerce) {
+		this.exerce = exerce;
+	}
+
+
+	public String getResult() {
+		return result;
+	}
+
+
+	public void setResult(String result) {
+		this.result = result;
 	}
 
 

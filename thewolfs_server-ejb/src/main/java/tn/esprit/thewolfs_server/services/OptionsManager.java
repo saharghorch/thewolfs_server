@@ -83,8 +83,8 @@ public class OptionsManager implements OptionsRemote,OptionsLocal {
 	}
 
 	@Override
-	public List<Options> findOptionsValid(Status Valid) {
-		String jpql = "select o from Options o where o.status='" + Valid + "'";
+	public List<Options> findOptionsValid(Status Valid, int id) {
+		String jpql = "select o from Options o where o.status='" + Valid + "'and o.counterparty IS NULL and o.trader <>"+id;
 		Query qry = em.createQuery(jpql, Options.class);
 		return qry.getResultList();
 	}
@@ -119,7 +119,7 @@ public class OptionsManager implements OptionsRemote,OptionsLocal {
 
 	@Override
 	public List<Options> findOptionsByCounterparty(int id) {
-		String jpql = "select o from Options o where o.counterparty=" + id;
+		String jpql = "select o from Options o where o.exerce=0 and o.counterparty=" + id;
 		Query qry = em.createQuery(jpql, Options.class);
 		return qry.getResultList();
 	}
@@ -169,4 +169,105 @@ public class OptionsManager implements OptionsRemote,OptionsLocal {
 		TypedQuery<Options> query=em.createQuery("SELECT o FROM Options o",Options.class);
 		return (query.getResultList());
 	}
+	@Override
+	public String Result(Type type, float p, float k, float s) {
+		if (type==Type.Call)
+		{
+			if (s>k+p)
+			{
+				return "Won";
+			}
+			else 
+			{
+				return "Lost";
+			}
+		}
+		else
+		{
+			if(s<k-p)	
+			{
+				return "Won";
+			}
+			else
+			{
+				return "Lost";
+			}
+		}
+		
+		
+	}
+	@Override
+	public Account FindAccount(int trader_id) { 
+		String jpql = "select o from Account o where o.trader= '"+trader_id+"' ";
+		TypedQuery qry = em.createQuery(jpql, Account.class);
+		return (Account) (qry.getResultList()).get(0);
+	}
+	@Override
+	public Double SumPremium(int trader_id) {
+		String jpql = "select SUM(o.premium_price) from Options o where o.trader="+trader_id+"and o.counterparty IS NOT NULL";
+		TypedQuery qry = (TypedQuery) em.createQuery(jpql);
+		return (Double) qry.getSingleResult();
+		
+	}
+	@Override
+	public Float ExerceOption(Type type, float p, float k, float s) {
+		Float e;
+		if (type==Type.Call)
+		{
+		 e = s-k-p;
+			return e;
+		}
+		else 
+		{
+			e = k-s-p;
+			return e;
+		}
+	}
+	@Override
+	public void UpdateEx(int id) {
+		Options option = em.find(Options.class,id);
+		option.setExerce(1);
+		
+	}
+	@Override
+	public String ResultTrader(Type type, float p, float k, float s) {
+		if (type==Type.Call)
+		{
+			if (s>k +p)
+			{
+				return "Lost";
+			}
+			else 
+			{
+				return "Won";
+			}
+		}
+		else
+		{
+			if(s<k-p)	
+			{
+				return "Lost";
+			}
+			else
+			{
+				return "Won";
+			}
+		}
+	}
+
+	@Override
+	public void UpdateOptionResult(int id, String r) {
+		Options option = em.find(Options.class, id);
+		option.setResult(r);
+
+		
+	}
+
+	@Override
+	public List<Options> findOptionsExerced(int id) {
+		String jpql = "select o from Options o where o.exerce=1 and o.counterparty=" + id;
+		Query qry = em.createQuery(jpql, Options.class);
+		return qry.getResultList();
+	}
+
 }

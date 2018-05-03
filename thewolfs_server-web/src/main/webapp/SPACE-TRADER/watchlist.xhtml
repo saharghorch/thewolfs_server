@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html" template="#{layoutMB.template}"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:adm="http://github.com/adminfaces"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+	<ui:define name="head-end">
+		<ui:param name="renderBreadCrumb" value="false" />
+	</ui:define>
+
+	<ui:define name="title">
+		<h2 class="align-center">Trading is our mission</h2>
+		<p:tabMenu activeIndex="#{param.i}">
+			<p:menuitem value="Overview" outcome="/SPACE-TRADER/accounts"
+				icon="ui-icon-star">
+				<f:param name="i" value="0" />
+			</p:menuitem>
+			<p:menuitem value="Accounts" outcome="/SPACE-TRADER/accounts"
+				icon="ui-icon-search">
+				<f:param name="i" value="1" />
+			</p:menuitem>
+			<p:menuitem value="Portfolio" outcome="/SPACE-TRADER/stock-option"
+				icon="ui-icon-document">
+				<f:param name="i" value="2" />
+			</p:menuitem>
+			<p:menuitem value="Asset" outcome="/SPACE-TRADER/asset"
+				icon="ui-icon-wrench">
+				<f:param name="i" value="3" />
+			</p:menuitem>
+			<p:menuitem value="Watchlist" outcome="/SPACE-TRADER/watchlist"
+				icon="ui-icon-wrench">
+				<f:param name="i" value="3" />
+			</p:menuitem>
+			<p:menuitem value="Social" outcome="/SPACE-TRADER/accounts"
+				icon="ui-icon-person">
+				<f:param name="i" value="4" />
+			</p:menuitem>
+		</p:tabMenu>
+
+		<h:form id="form1">
+		<p:messages id="messages" rendered="#{assetBean.showMessages}"
+							globalOnly="false" showDetail="true" autoUpdate="true" closable="true"/>
+			<p:dataTable value="#{watchlistBean.listOptions}" paginator="true"
+				emptyMessage="No Data" resizableColumns="true"
+				selectionMode="single" rowKey="#{options.id}"
+				paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="5,10,15" var="options" id="data" rows="10">
+				<p:ajax event="rowSelect" listener="#{watchlistBean.onRowSelect}"
+					update="form1:evalId form1:probaId" />
+				<p:column headerText="Underlying Price (EUR)"
+					filterBy="#{options.stock_price}" sortBy="#{options.stock_price}">
+					<h:outputText value="#{options.stock_price}" />
+				</p:column>
+				<p:column headerText="Volatility" filterBy="#{options.volatility}"
+					sortBy="#{options.volatility}">
+					<h:outputText value="#{options.volatility}" />
+				</p:column>
+				<p:column headerText="Strike Price"
+					filterBy="#{options.strike_price}" sortBy="#{options.strike_price}">
+					<h:outputText value="#{options.strike_price}" />
+				</p:column>
+
+				<p:column headerText="Status" filterBy="#{options.status}"
+					sortBy="#{options.status}">
+					<h:outputText value="#{options.status}" />
+				</p:column>
+
+				<p:column headerText="Type" filterBy="#{options.type}"
+					sortBy="#{options.type}">
+					<h:outputText value="#{options.type}" />
+				</p:column>
+
+				<p:column headerText="Time To Expiry"
+					filterBy="#{options.time_to_expiry}"
+					sortBy="#{options.time_to_expiry}">
+					<h:outputText value="#{options.time_to_expiry}" />
+				</p:column>
+
+
+
+
+			</p:dataTable>
+			<h:panelGrid>
+				<p:column>
+					<h:outputText id="eval1Id" value="Evaluation : "
+						styleClass="DetailLabel" />
+				</p:column>
+				<p:column>
+					<h:outputText id="evalId"
+						value="#{watchlistBean.options.evaluation}"
+						styleClass="DetailLabel" />
+
+				</p:column>
+				<p:column>
+					<h:outputText id="proba1Id" value="Success Probability : "
+						styleClass="DetailLabel" />
+
+				</p:column>
+				<p:column>
+					<h:outputText id="probaId"
+						value="#{watchlistBean.options.successProbability}"
+						styleClass="DetailLabel" />
+
+				</p:column>
+
+			</h:panelGrid>
+			<h:panelGrid>
+
+				<p:spacer height="10" />
+				<p:commandButton value="Add to my Portfolio"
+					action="#{watchlistBean.ajoutPort()}" icon="ui-icon-disk">
+
+				</p:commandButton>
+
+				<p:spacer width="5" />
+			</h:panelGrid>
+		</h:form>
+
+	</ui:define>
+</ui:composition>

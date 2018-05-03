@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.ejb.Local;
 
+import tn.esprit.thewolfs_server.entity.Account;
 import tn.esprit.thewolfs_server.entity.Asset;
 import tn.esprit.thewolfs_server.entity.Options;
 import tn.esprit.thewolfs_server.entity.Status;
@@ -17,8 +18,9 @@ public interface OptionsLocal {
 	public void deleteOption(int id);
 	public Options getOptionById(int id);
 	public void UpdateOptionStatus(int id,Status status);
+	public void UpdateOptionResult(int id,String r);
 	public List<Options> findAll();
-	public List<Options> findOptionsValid(Status Valid);
+	public List<Options> findOptionsValid(Status Valid, int id);
 	public List<Options> findOptionsValidSold(Status Valid);
 	public List<Options> findOptionsByType(Type type);
 	public List<Asset> findAssetType();
@@ -30,4 +32,11 @@ public interface OptionsLocal {
 	public Float FindAmountTrader (int id);
 	public void UpdateAmount(int trader_id, float am);
 	public List<Options> displayAllOptions();
+	public Account FindAccount(int trader_id);
+	public String Result (Type type, float p, float k, float s);
+	public String ResultTrader (Type type, float p, float k, float s);
+	public Float ExerceOption (Type type, float p, float k, float s);
+	public Double SumPremium(int trader_id);
+	public void UpdateEx(int id);
+	public List<Options> findOptionsExerced (int id);
 }

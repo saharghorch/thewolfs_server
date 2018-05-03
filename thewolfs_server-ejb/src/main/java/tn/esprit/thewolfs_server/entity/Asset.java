@@ -1,6 +1,7 @@
 package tn.esprit.thewolfs_server.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,21 +15,26 @@ public class Asset implements Serializable {
 
 
 
+	@Override
+	public String toString() {
+		return "Asset [id=" + id + ", optionStartDate=" + optionStartDate + ", optionExpirationDate="
+				+ optionExpirationDate + ", sharesNumber=" + sharesNumber + ", traderSharesNumber=" + traderSharesNumber
+				+ ", name=" + name + ", totalValue=" + totalValue + ", sharesValue=" + sharesValue + 
+				", stock=" + stock + "]";
+	}
+
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;	
-	private java.sql.Date optionStartDate;
-	private java.sql.Date  optionExpirationDate;
+	private Date optionStartDate;
+	private Date  optionExpirationDate;
 	private  int sharesNumber;
 	private int traderSharesNumber;
 	private String name;
 	private Double totalValue;
 	private Double sharesValue;
 
-	@OneToMany(mappedBy="asset")
-	
-
-	private List<Options> options;
 	@ManyToOne
 	private Stock stock;
 	
@@ -56,25 +62,24 @@ public class Asset implements Serializable {
 	}
 
 
-	public java.sql.Date getOptionStartDate() {
+	
+
+
+	public Date getOptionStartDate() {
 		return optionStartDate;
 	}
 
-
-	public void setOptionStartDate(java.sql.Date optionStartDate) {
+	public void setOptionStartDate(Date optionStartDate) {
 		this.optionStartDate = optionStartDate;
 	}
 
-
-	public java.sql.Date getOptionExpirationDate() {
+	public Date getOptionExpirationDate() {
 		return optionExpirationDate;
 	}
 
-
-	public void setOptionExpirationDate(java.sql.Date optionExpirationDate) {
+	public void setOptionExpirationDate(Date optionExpirationDate) {
 		this.optionExpirationDate = optionExpirationDate;
 	}
-
 
 	public int getSharesNumber() {
 		return sharesNumber;
@@ -123,16 +128,6 @@ public class Asset implements Serializable {
 
 	public void setSharesValue(Double sharesValue) {
 		this.sharesValue = sharesValue;
-	}
-
-
-	public List<Options> getOptions() {
-		return options;
-	}
-
-
-	public void setOptions(List<Options> options) {
-		this.options = options;
 	}
 
 
